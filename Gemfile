@@ -45,6 +45,7 @@ group :development do
   # Code analysis tools
   gem 'rubocop', '= 1.11.0', require: false
   gem 'rubocop-rails', '= 2.9.1', require: false
+  gem 'rubocop-checkstyle_formatter', require: false
 end
 
 group :test do
@@ -53,6 +54,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'simplecov', '= 0.21.2', require: false
+  gem 'simplecov-rcov', '= 0.2.3', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
