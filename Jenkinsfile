@@ -133,7 +133,7 @@ pipeline {
         #
         # Using "|| true" so that build will be considered successful, even if there are Rubocop
         # violation.
-        bundle exec rubocop -D --format clang || true
+        bundle exec rubocop -D --fail-level autocorrect || true
       '''
       }
       post {
