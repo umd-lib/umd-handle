@@ -1,24 +1,26 @@
-# README
+# umd-handle
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+REST-based Handle back-end service with administrative user interface.
 
-Things you may want to cover:
+## Introduction
 
-* Ruby version
+This application provides:
 
-* System dependencies
+* a REST backend for resolving Handle.Net Registry handles to URLs.
+* an HTTP-based user interface for administering handle to URL mappings
+* a REST-based API interface for administring handle to URL mappings
 
-* Configuration
+## Quick Start
 
-* Database creation
+Requires:
 
-* Database initialization
+* Ruby 2.7.2
 
-* How to run the test suite
+```
+git clone git@github.com:umd-lib/umd-handle
+cd umd-handle
+bundle install --without production
+rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<http://localhost:3000/>
