@@ -54,6 +54,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'minitest-reporters', '1.4.3', require: false
   gem 'simplecov', '= 0.21.2', require: false
   gem 'simplecov-rcov', '= 0.2.3', require: false
 end
