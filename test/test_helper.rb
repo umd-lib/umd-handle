@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'simplecov-rcov'
 SimpleCov.formatters = [
@@ -7,8 +9,8 @@ SimpleCov.formatters = [
 SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'
-require_relative "../config/environment"
-require "rails/test_help"
+require_relative '../config/environment'
+require 'rails/test_help'
 
 # Improved Minitest output (color and progress bar)
 require 'minitest/reporters'
