@@ -17,10 +17,18 @@ Requires:
 * Ruby 2.7.2
 
 ```
-git clone git@github.com:umd-lib/umd-handle
-cd umd-handle
-bundle install --without production
-rails server
+> git clone git@github.com:umd-lib/umd-handle
+> cd umd-handle
+> bundle install --without production
+> rails server
 ```
 
 <http://localhost:3000/>
+
+## Docker.ci and Jenkinsfile
+
+The "Dockerfile.ci" file is used to encapsulate the environment needed by the
+continuous integration (ci) server for building and testing the application.
+
+The "Jenkinsfile" provides the Jenkins pipeline steps for building and testing
+the application.
