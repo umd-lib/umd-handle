@@ -15,11 +15,14 @@ This application provides:
 Requires:
 
 * Ruby 2.7.2
+* Node.js v8.16.0 or greater
+* Yarn v1.22.0 or greater
 
 ```
 > git clone git@github.com:umd-lib/umd-handle
 > cd umd-handle
 > bundle install --without production
+> yarn
 > rails server
 ```
 
@@ -32,3 +35,18 @@ continuous integration (ci) server for building and testing the application.
 
 The "Jenkinsfile" provides the Jenkins pipeline steps for building and testing
 the application.
+
+## umd_lib_style gem
+
+This application uses the "umd_lib_style" gem to provide a UI look-and-feel
+similar to other UMD Rails applications.
+
+The "umd_lib_style" gem is not currently configured to support the use of
+webpacker, and it is currently unclear how to incorporate the JavaScript
+dependencies from the Rails engine gem into a Rails application that uses
+that gem.
+
+Therefore, this application has been configured to load the necessary
+JavaScript dependencies required by Bootstrap v3 in its own "package.json" file,
+and is using a custom "app/views/layouts/_umd_lib.html.erb" file, replacing
+the `javascript_include_tag` directive with `javascript_pack_tag`.

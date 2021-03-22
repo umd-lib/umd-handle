@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/umd-lib/umd_lib_style.git
+  revision: d6bca204c40508cc94ed73930eff3a2f40c1f0b7
+  ref: 2.0.0
+  specs:
+    umd_lib_style (2.0.0)
+      rails (>= 4.2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -264,6 +272,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  umd_lib_style!
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
