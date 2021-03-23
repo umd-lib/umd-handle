@@ -5,7 +5,9 @@ class HandlesController < ApplicationController
 
   # GET /handles or /handles.json
   def index
-    @handles = Handle.all
+    @q = Handle.ransack(params[:q])
+    @q.sorts = 'prefix asc suffix asc' if @q.sorts.empty?
+    @handles = @q.result.page(params[:page])
   end
 
   # GET /handles/1 or /handles/1.json

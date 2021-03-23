@@ -1,39 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <h1><%= @handle.to_handle_string %> <small>Handle</small></h1>
+</div>
 
-<p>
-  <strong>Prefix:</strong>
-  <%= @handle.prefix %>
-</p>
+<table class="table table-striped">
+  <tbody>
+  <tr>
+    <th>Prefix</th>
+    <td><%= @handle.prefix %></th>
+  </tr>
+  <tr>
+    <th>Suffix</th>
+    <td><%= @handle.suffix %></td>
+  </tr>
+  <tr>
+    <th>Url</th>
+    <td><%= @handle.url %></td>
+  </tr>
+  <tr>
+    <th>Repository</th>
+    <td><%= @handle.repo %></td>
+  </tr>
+  <tr>
+    <th>Repository Id</th>
+    <td><%= @handle.repo_id %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= @handle.description %></td>
+  </tr>
+  <tr>
+    <th>Notes</th>
+    <td><%= simple_format(@handle.notes.to_s) %></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td>
+      <%= link_to 'Edit', edit_handle_path(@handle), class: 'btn btn-info' %>
+      <%= link_to 'List All Handles', handles_path, class: 'btn btn-default' %>
+    </td>
+  </tbody>
+</table>
 
-<p>
-  <strong>Suffix:</strong>
-  <%= @handle.suffix %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @handle.url %>
-</p>
-
-<p>
-  <strong>Repo:</strong>
-  <%= @handle.repo %>
-</p>
-
-<p>
-  <strong>Repo:</strong>
-  <%= @handle.repo_id %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @handle.description %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @handle.notes %>
-</p>
-
-<%= link_to 'Edit', edit_handle_path(@handle) %> |
-<%= link_to 'Back', handles_path %>

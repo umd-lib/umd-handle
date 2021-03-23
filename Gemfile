@@ -30,6 +30,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '2.0.0'
 
+gem 'kaminari', '>=1.2.1'
+gem 'ransack', '>= 2.4.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -59,6 +62,7 @@ group :test do
   gem 'minitest-reporters', '1.4.3', require: false
   gem 'simplecov', '= 0.21.2', require: false
   gem 'simplecov-rcov', '= 0.2.3', require: false
+  gem 'faker', '>= 2.17.0'
 end
 
 gem 'tzinfo-data', '>= 1.2016.7' # Don't rely on OSX/Linux timezone data

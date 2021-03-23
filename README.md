@@ -50,3 +50,17 @@ Therefore, this application has been configured to load the necessary
 JavaScript dependencies required by Bootstrap v3 in its own "package.json" file,
 and is using a custom "app/views/layouts/_umd_lib.html.erb" file, replacing
 the `javascript_include_tag` directive with `javascript_pack_tag`.
+
+## Rake Tasks
+
+Populates the database with sample data
+
+```
+> rails db:populate_sample_data
+```
+
+Drop, create, migrate, seed and populate sample data
+
+```
+> rails db:reset_with_sample_data
+```
