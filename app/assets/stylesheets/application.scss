@@ -14,3 +14,15 @@
  *= require_self
  */
  @import "umd_lib";
+
+// Set style of disabled pagination buttons
+.pagination .disabled {
+  color: #777777;
+  cursor: not-allowed;
+}
+
+.pagination > li > span:hover,  .pagination > li > span:focus {
+  color: #777777;
+  cursor: not-allowed;
+  background-color: #fff;
+}

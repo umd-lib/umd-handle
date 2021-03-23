@@ -1,3 +1,7 @@
 <li>
-  <%= link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, rel: 'prev', remote: remote %>
+  <% if current_page.first? %>
+    <span class="prev disabled"><%= raw(t 'views.pagination.previous') %></span>
+  <% else %>
+    <%= link_to raw(t 'views.pagination.previous'), url, rel: 'prev', remote: remote %>
+  <% end %>
 </li>

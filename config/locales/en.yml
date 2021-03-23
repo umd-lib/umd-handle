@@ -35,4 +35,7 @@ en:
       handle:
         repo: 'Repository'
         repo_id: 'Repository Id'
-
+  views:
+    pagination:
+      previous: ← Previous
+      next: Next →
