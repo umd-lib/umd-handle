@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Handles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix</th>
+      <th>Suffix</th>
+      <th>Url</th>
+      <th>Repo</th>
+      <th>Repo</th>
+      <th>Description</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @handles.each do |handle| %>
+      <tr>
+        <td><%= handle.prefix %></td>
+        <td><%= handle.suffix %></td>
+        <td><%= handle.url %></td>
+        <td><%= handle.repo %></td>
+        <td><%= handle.repo_id %></td>
+        <td><%= handle.description %></td>
+        <td><%= handle.notes %></td>
+        <td><%= link_to 'Show', handle %></td>
+        <td><%= link_to 'Edit', edit_handle_path(handle) %></td>
+        <td><%= link_to 'Destroy', handle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Handle', new_handle_path %>

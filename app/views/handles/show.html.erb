@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prefix:</strong>
+  <%= @handle.prefix %>
+</p>
+
+<p>
+  <strong>Suffix:</strong>
+  <%= @handle.suffix %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @handle.url %>
+</p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @handle.repo %>
+</p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @handle.repo_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @handle.description %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @handle.notes %>
+</p>
+
+<%= link_to 'Edit', edit_handle_path(@handle) %> |
+<%= link_to 'Back', handles_path %>

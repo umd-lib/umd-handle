@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prefix: MyString
+  suffix: 1
+  url: MyString
+  repo: MyString
+  repo_id: MyString
+  description: MyString
+  notes: MyText
+
+two:
+  prefix: MyString
+  suffix: 1
+  url: MyString
+  repo: MyString
+  repo_id: MyString
+  description: MyString
+  notes: MyText
