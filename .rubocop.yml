@@ -46,3 +46,6 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'test/test_helper.rb'
     - 'test/channels/application_cable/connection_test.rb'
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded

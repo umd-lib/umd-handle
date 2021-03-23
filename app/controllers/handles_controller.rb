@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class HandlesController < ApplicationController
-  before_action :set_handle, only: %i[ show edit update destroy ]
+  before_action :set_handle, only: %i[show edit update destroy]
 
   # GET /handles or /handles.json
   def index
@@ -25,7 +27,7 @@ class HandlesController < ApplicationController
 
     respond_to do |format|
       if @handle.save
-        format.html { redirect_to @handle, notice: "Handle was successfully created." }
+        format.html { redirect_to @handle, notice: 'Handle was successfully created.' }
         format.json { render :show, status: :created, location: @handle }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class HandlesController < ApplicationController
   def update
     respond_to do |format|
       if @handle.update(handle_params)
-        format.html { redirect_to @handle, notice: "Handle was successfully updated." }
+        format.html { redirect_to @handle, notice: 'Handle was successfully updated.' }
         format.json { render :show, status: :ok, location: @handle }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,12 +53,13 @@ class HandlesController < ApplicationController
   def destroy
     @handle.destroy
     respond_to do |format|
-      format.html { redirect_to handles_url, notice: "Handle was successfully destroyed." }
+      format.html { redirect_to handles_url, notice: 'Handle was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_handle
       @handle = Handle.find(params[:id])
