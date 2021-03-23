@@ -14,6 +14,7 @@
       <th><%= sort_link(@q, :repo_id) %></th>
       <th><%= sort_link(@q, :description) %></th>
       <th><%= sort_link(@q, :notes) %></th>
+      <td><%= sort_link(@q, :updated_at) %></td>
       <th></th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
         <td><%= handle.repo_id %></td>
         <td><%= handle.description %></td>
         <td><%= simple_format(handle.notes) %></td>
+        <td><%= handle.updated_at %></td>
         <td><%= link_to 'Show', handle %></td>
         <td><%= link_to 'Edit', edit_handle_path(handle) %></td>
         <td><%= link_to 'Destroy', handle, method: :delete, data: { confirm: 'Are you sure?' } %></td>

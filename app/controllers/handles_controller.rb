@@ -6,7 +6,7 @@ class HandlesController < ApplicationController
   # GET /handles or /handles.json
   def index
     @q = Handle.ransack(params[:q])
-    @q.sorts = 'prefix asc suffix asc' if @q.sorts.empty?
+    @q.sorts = 'updated_at desc' if @q.sorts.empty?
     @handles = @q.result.page(params[:page])
   end
 
