@@ -7,13 +7,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= sort_link(@q, :prefix) %></th>
-      <th><%= sort_link(@q, :suffix) %></th>
+      <th><%= sort_link(@q, :handle, [:handle, :prefix, :suffix]) %></th>
       <th><%= sort_link(@q, :url) %></th>
       <th><%= sort_link(@q, :repo) %></th>
       <th><%= sort_link(@q, :repo_id) %></th>
-      <th><%= sort_link(@q, :description) %></th>
-      <th><%= sort_link(@q, :notes) %></th>
       <td><%= sort_link(@q, :updated_at) %></td>
       <th></th>
     </tr>
@@ -22,17 +19,17 @@
   <tbody>
     <% @handles.each do |handle| %>
       <tr>
-        <td><%= handle.prefix %></td>
-        <td><%= handle.suffix %></td>
+        <td><%= link_to handle.to_handle_string, handle %></td>
         <td><%= handle.url %></td>
         <td><%= handle.repo %></td>
         <td><%= handle.repo_id %></td>
-        <td><%= handle.description %></td>
-        <td><%= simple_format(handle.notes) %></td>
         <td><%= handle.updated_at %></td>
-        <td><%= link_to 'Show', handle %></td>
-        <td><%= link_to 'Edit', edit_handle_path(handle) %></td>
-        <td><%= link_to 'Destroy', handle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <span>
+          <%= link_to 'Edit', edit_handle_path(handle), class: 'btn btn-info' %>
+          <%= link_to 'Delete', handle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </span>
+        </td>
       </tr>
     <% end %>
   </tbody>
