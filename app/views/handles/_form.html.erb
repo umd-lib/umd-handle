@@ -31,7 +31,7 @@
 
     <tr>
       <th><%= form.label :repo %></th>
-      <td><%= form.text_field :repo %></td>
+      <td><%= form.select(:repo, Handle.repos) %></td>
     </tr>
 
     <tr>

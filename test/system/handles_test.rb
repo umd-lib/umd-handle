@@ -15,6 +15,7 @@ class HandlesTest < ApplicationSystemTestCase
 
   test 'creating a Handle' do
     prefix_to_select = Handle.prefixes[0]
+    repo_to_select = Handle.repos[0]
 
     visit handles_url
     click_on 'New Handle'
@@ -22,7 +23,7 @@ class HandlesTest < ApplicationSystemTestCase
     fill_in 'Description', with: @handle.description
     fill_in 'Notes', with: @handle.notes
     select prefix_to_select, from: 'Prefix'
-    fill_in 'Repository', with: @handle.repo
+    select repo_to_select, from: 'Repository'
     fill_in 'Repository Id', with: @handle.repo_id
     fill_in 'Url', with: @handle.url
     click_on 'Create Handle'
