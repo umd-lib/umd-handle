@@ -21,6 +21,10 @@ namespace :db do
       handle.repo_id = "umd:#{Faker::Number.number(digits: 10)}"
       handle.description = Faker::Lorem.sentence(word_count: 3, random_words_to_add: 7) if rand > 0.25
       handle.notes = Faker::Lorem.paragraphs.join("\n\n") if rand > 0.5
+      created_at = Faker::Time.between(from: '2001-01-01', to: Date.today)
+      updated_at = Faker::Time.between(from: created_at, to: Date.today)
+      handle.created_at = created_at
+      handle.updated_at = updated_at
       handle.save!
     end
   end

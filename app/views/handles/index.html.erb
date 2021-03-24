@@ -11,7 +11,7 @@
       <th><%= sort_link(@q, :url) %></th>
       <th><%= sort_link(@q, :repo) %></th>
       <th><%= sort_link(@q, :repo_id) %></th>
-      <td><%= sort_link(@q, :updated_at) %></td>
+      <td><%= sort_link(@q, :updated_at, 'Last Update') %></td>
       <th></th>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
         <td><%= handle.url %></td>
         <td><%= handle.repo %></td>
         <td><%= handle.repo_id %></td>
-        <td><%= handle.updated_at %></td>
+        <td title="<%= handle.updated_at.to_formatted_s %>"><%= time_ago_in_words(handle.updated_at) %> ago</td>
         <td>
           <span>
           <%= link_to 'Edit', edit_handle_path(handle), class: 'btn btn-info' %>
