@@ -6,6 +6,7 @@ class Handle < ApplicationRecord
   validate :validate_prefix
   validates :suffix, uniqueness: { scope: :prefix }
   validate :validate_repo
+  validates :repo_id, presence: true
 
   # Lock for ensuring synchronization in mint_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
