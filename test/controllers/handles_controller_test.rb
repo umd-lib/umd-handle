@@ -23,7 +23,7 @@ class HandlesControllerTest < ActionDispatch::IntegrationTest
         handle: {
           description: @handle.description, notes: @handle.notes,
           prefix: @handle.prefix, repo: @handle.repo, repo_id: @handle.repo_id,
-          suffix: @handle.suffix, url: @handle.url
+          url: @handle.url
         }
       }
     end

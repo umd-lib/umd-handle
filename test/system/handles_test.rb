@@ -22,12 +22,10 @@ class HandlesTest < ApplicationSystemTestCase
     fill_in 'Prefix', with: @handle.prefix
     fill_in 'Repository', with: @handle.repo
     fill_in 'Repository Id', with: @handle.repo_id
-    fill_in 'Suffix', with: @handle.suffix
     fill_in 'Url', with: @handle.url
     click_on 'Create Handle'
 
     assert_text 'Handle was successfully created'
-    click_on 'Back'
   end
 
   test 'updating a Handle' do
@@ -39,18 +37,16 @@ class HandlesTest < ApplicationSystemTestCase
     fill_in 'Prefix', with: @handle.prefix
     fill_in 'Repository', with: @handle.repo
     fill_in 'Repository Id', with: @handle.repo_id
-    fill_in 'Suffix', with: @handle.suffix
     fill_in 'Url', with: @handle.url
     click_on 'Update Handle'
 
     assert_text 'Handle was successfully updated'
-    click_on 'Back'
   end
 
   test 'destroying a Handle' do
     visit handles_url
     page.accept_confirm do
-      click_on 'Destroy', match: :first
+      click_on 'Delete', match: :first
     end
 
     assert_text 'Handle was successfully destroyed'

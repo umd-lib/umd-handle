@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_123334) do
+ActiveRecord::Schema.define(version: 2021_03_24_115829) do
 
   create_table "handles", force: :cascade do |t|
     t.string "prefix"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_123334) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["prefix", "suffix"], name: "index_handles_on_prefix_and_suffix", unique: true
   end
 
 end

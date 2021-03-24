@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  prefix: MyString
+  prefix: FIXTURE
   suffix: 1
   url: MyString
   repo: MyString
@@ -10,8 +10,8 @@ one:
   notes: MyText
 
 two:
-  prefix: MyString
-  suffix: 1
+  prefix: FIXTURE
+  suffix: 2
   url: MyString
   repo: MyString
   repo_id: MyString
