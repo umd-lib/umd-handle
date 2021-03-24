@@ -8,10 +8,15 @@
       <td><%= form.text_field :prefix %></td>
     </tr>
 
-    <tr>
+    <% if handle.new_record? %>
       <th><%= form.label :suffix %></th>
-      <td><%= form.number_field :suffix %></td>
-    </tr>
+      <td>Suffix is generated automatically</td>
+    <% else %>
+      <tr>
+        <th><%= form.label :suffix %></th>
+        <td><%= handle.suffix %></td>
+      </tr>
+    <% end %>
 
     <tr>
       <th><%= form.label :url %></th>

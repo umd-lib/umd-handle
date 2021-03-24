@@ -52,6 +52,22 @@ class HandlesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to handle_url(@handle)
   end
 
+  test 'should not be able to update suffix of handle' do
+    original_suffix = @handle.suffix
+    new_suffix = Handle.group(:prefix).maximum(:suffix)[@handle.prefix] + 1
+    assert_not_equal original_suffix, new_suffix
+
+    patch handle_url(@handle), params: {
+      handle: {
+        suffix: new_suffix
+      }
+    }
+
+    @handle.reload
+    assert_equal original_suffix, @handle.suffix
+    assert_redirected_to handle_url(@handle)
+  end
+
   test 'should destroy handle' do
     assert_difference('Handle.count', -1) do
       delete handle_url(@handle)

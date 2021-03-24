@@ -69,6 +69,6 @@ class HandlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def handle_params
-      params.require(:handle).permit(:prefix, :suffix, :url, :repo, :repo_id, :description, :notes)
+      params.require(:handle).permit(:prefix, :url, :repo, :repo_id, :description, :notes)
     end
 end
