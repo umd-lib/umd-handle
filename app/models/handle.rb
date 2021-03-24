@@ -3,6 +3,7 @@
 # Maps a handle URL to the actual resource URL
 class Handle < ApplicationRecord
   around_create :generate_next_suffix
+  validates :suffix, uniqueness: { scope: :prefix }
 
   # Lock for ensuring synchronization in generate_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
