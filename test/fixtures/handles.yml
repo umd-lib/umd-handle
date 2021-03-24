@@ -3,7 +3,7 @@
 one:
   prefix: '1903.1'
   suffix: 1
-  url: MyString
+  url: http://example.com/test/one
   repo: aspace
   repo_id: MyString
   description: MyString
@@ -12,7 +12,7 @@ one:
 two:
   prefix: '1903.1'
   suffix: 2
-  url: MyString
+  url: http://example.com/test/two
   repo: avalon
   repo_id: MyString
   description: MyString

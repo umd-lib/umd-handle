@@ -7,6 +7,7 @@ class Handle < ApplicationRecord
   validates :suffix, uniqueness: { scope: :prefix }
   validate :validate_repo
   validates :repo_id, presence: true
+  validate :validate_url
 
   # Lock for ensuring synchronization in mint_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
@@ -17,6 +18,18 @@ class Handle < ApplicationRecord
 
   def validate_repo
     errors.add(:repo, "'#{repo}' is not a valid repository") unless Handle.repos.include?(repo)
+  end
+
+  def validate_url
+    valid = false
+    begin
+      uri = URI.parse(url)
+      valid = uri.is_a?(URI::HTTP) && uri.host.present?
+    rescue URI::InvalidURIError
+      valid = false
+    end
+
+    errors.add(:url, "'#{url}' is not a valid URL") unless valid
   end
 
   def self.prefixes

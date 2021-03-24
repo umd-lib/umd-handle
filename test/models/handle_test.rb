@@ -5,11 +5,15 @@ require 'test_helper'
 # Tests for the Handle model
 class HandleTest < ActiveSupport::TestCase
   setup do
-    @valid_prefix = Handle.prefixes[0]
-    @valid_repo = Handle.repos[0]
-    @valid_repo_id = 'test'
+    valid_prefix = Handle.prefixes[0]
+    valid_repo = Handle.repos[0]
+    valid_repo_id = 'test'
+    valid_url = 'http://example.com/test'
 
-    @valid_handle = Handle.new(prefix: @valid_prefix, repo: @valid_repo, repo_id: @valid_repo_id)
+    @valid_handle = Handle.new(
+      prefix: valid_prefix, repo: valid_repo, repo_id: valid_repo_id,
+      url: valid_url
+    )
   end
 
   test 'combined prefix and suffix must be unique model validation' do
@@ -59,5 +63,35 @@ class HandleTest < ActiveSupport::TestCase
     handle = @valid_handle
     handle.repo_id = ''
     assert_not handle.valid?
+  end
+
+  test 'invalid URLs are not allowed' do
+    invalid_urls = [
+      '',
+      ' ',
+      'abcd',
+      'http123',
+      'ftp://lib.umd.edu'
+    ]
+
+    invalid_urls.each do |url|
+      handle = @valid_handle
+      handle.url = url
+      assert_not handle.valid?, "'#{url}' was accepted as a valid url"
+    end
+  end
+
+  test 'valid URLs are allowed' do
+    valid_urls = [
+      'http://drum.lib.umd.edu/handle/1903/413',
+      'http://drum.lib.umd.edu/handle/1903/413',
+      'http://example.com/'
+    ]
+
+    valid_urls.each do |url|
+      handle = @valid_handle
+      handle.url = url
+      assert handle.valid?, "'#{url}' was not accepted as a valid url"
+    end
   end
 end
