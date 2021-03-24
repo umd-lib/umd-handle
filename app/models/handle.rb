@@ -3,10 +3,20 @@
 # Maps a handle URL to the actual resource URL
 class Handle < ApplicationRecord
   around_create :mint_next_suffix
+  validate :validate_prefix
   validates :suffix, uniqueness: { scope: :prefix }
+  validate :validate_repo
 
   # Lock for ensuring synchronization in mint_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
+
+  def validate_prefix
+    errors.add(:prefix, "'#{prefix}' is not a valid prefix") unless Handle.prefixes.include?(prefix)
+  end
+
+  def validate_repo
+    errors.add(:repo, "'#{repo}' is not a valid repository") unless Handle.repos.include?(repo)
+  end
 
   def self.prefixes
     %w[1903.1]
