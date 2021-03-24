@@ -14,12 +14,14 @@ class HandlesTest < ApplicationSystemTestCase
   end
 
   test 'creating a Handle' do
+    prefix_to_select = Handle.prefixes[0]
+
     visit handles_url
     click_on 'New Handle'
 
     fill_in 'Description', with: @handle.description
     fill_in 'Notes', with: @handle.notes
-    fill_in 'Prefix', with: @handle.prefix
+    select prefix_to_select, from: 'Prefix'
     fill_in 'Repository', with: @handle.repo
     fill_in 'Repository Id', with: @handle.repo_id
     fill_in 'Url', with: @handle.url
@@ -34,7 +36,6 @@ class HandlesTest < ApplicationSystemTestCase
 
     fill_in 'Description', with: @handle.description
     fill_in 'Notes', with: @handle.notes
-    fill_in 'Prefix', with: @handle.prefix
     fill_in 'Repository', with: @handle.repo
     fill_in 'Repository Id', with: @handle.repo_id
     fill_in 'Url', with: @handle.url

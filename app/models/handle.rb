@@ -8,6 +8,14 @@ class Handle < ApplicationRecord
   # Lock for ensuring synchronization in mint_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
 
+  def self.prefixes
+    %w[1903.1]
+  end
+
+  def self.repos
+    %w[aspace avalon fcrepo fedora2]
+  end
+
   def to_handle_string
     "#{prefix}/#{suffix}"
   end

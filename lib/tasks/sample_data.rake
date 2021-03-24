@@ -8,8 +8,8 @@ namespace :db do
   task populate_sample_data: :environment do
     require 'faker'
 
-    prefixes = ['1903.1', '1903.1-TEST']
-    repositories = ['fcrepo', 'fedora2', 'aspace','avalon']
+    prefixes = Handle.prefixes
+    repositories = Handle.repos
 
     num_handles = 50
     last_created_at = nil

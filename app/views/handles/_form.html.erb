@@ -4,8 +4,14 @@
   <table class="table table-striped">
     <tbody>
     <tr>
-      <th><%= form.label :prefix %></th>
-      <td><%= form.text_field :prefix %></td>
+      <%# Only new records should be allowed to set the prefix %>
+      <% if handle.new_record? %>
+        <th><%= form.label :prefix %></th>
+        <td><%= form.select(:prefix, Handle.prefixes) %></td>
+      <% else %>
+        <th><%= form.label :prefix %></th>
+        <td><%= handle.prefix %></td>
+      <% end %>
     </tr>
 
     <% if handle.new_record? %>

@@ -45,10 +45,26 @@ class HandlesControllerTest < ActionDispatch::IntegrationTest
     patch handle_url(@handle), params: {
       handle: {
         description: @handle.description, notes: @handle.notes,
-        prefix: @handle.prefix, repo: @handle.repo, repo_id: @handle.repo_id,
+        repo: @handle.repo, repo_id: @handle.repo_id,
         suffix: @handle.suffix, url: @handle.url
       }
     }
+    assert_redirected_to handle_url(@handle)
+  end
+
+  test 'should not be able to update prefix of handle' do
+    original_prefix = @handle.prefix
+    new_prefix = 'some_other_prefix'
+    assert_not_equal original_prefix, new_prefix
+
+    patch handle_url(@handle), params: {
+      handle: {
+        prefix: new_prefix
+      }
+    }
+
+    @handle.reload
+    assert_equal original_prefix, @handle.prefix
     assert_redirected_to handle_url(@handle)
   end
 

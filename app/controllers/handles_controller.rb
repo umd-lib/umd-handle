@@ -39,9 +39,13 @@ class HandlesController < ApplicationController
   end
 
   # PATCH/PUT /handles/1 or /handles/1.json
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
-      if @handle.update(handle_params)
+      # Don't allow the prefix to be changed via update
+      allowed_params = handle_params
+      allowed_params.delete(:prefix)
+
+      if @handle.update(allowed_params)
         format.html { redirect_to @handle, notice: 'Handle was successfully updated.' }
         format.json { render :show, status: :ok, location: @handle }
       else
