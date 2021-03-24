@@ -26,7 +26,7 @@
 
     <tr>
       <th><%= form.label :url %></th>
-      <td><%= form.text_field :url %></td>
+      <td><%= form.text_field :url, style: "min-width: 100%" %></td>
     </tr>
 
     <tr>
@@ -36,17 +36,17 @@
 
     <tr>
       <th><%= form.label :repo_id %></th>
-      <td><%= form.text_field :repo_id %></td>
+      <td><%= form.text_field :repo_id, style: "min-width: 100%" %></td>
     </tr>
 
     <tr>
       <th><%= form.label :description %></th>
-      <td><%= form.text_field :description %></td>
+      <td><%= form.text_field :description, style: "min-width: 100%" %></td>
     </tr>
 
     <tr>
       <th><%= form.label :notes %></th>
-      <td><%= form.text_area :notes %></td>
+      <td><%= form.text_area :notes, rows: "6", style: "min-width: 100%" %></td>
     </tr>
 
     <tr>
