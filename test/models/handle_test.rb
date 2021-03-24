@@ -7,6 +7,9 @@ class HandleTest < ActiveSupport::TestCase
   setup do
     @valid_prefix = Handle.prefixes[0]
     @valid_repo = Handle.repos[0]
+    @valid_repo_id = 'test'
+
+    @valid_handle = Handle.new(prefix: @valid_prefix, repo: @valid_repo, repo_id: @valid_repo_id)
   end
 
   test 'combined prefix and suffix must be unique model validation' do
@@ -15,7 +18,7 @@ class HandleTest < ActiveSupport::TestCase
 
     assert_raise(ActiveRecord::RecordInvalid) do
       # Create another handle
-      handle2 = Handle.new(prefix: @valid_prefix, repo: @valid_repo, repo_id: 'test')
+      handle2 = @valid_handle
       handle2.save!
       # Attempt to set the suffix to the suffix of the other handle, while
       # skipping model validation
@@ -31,7 +34,7 @@ class HandleTest < ActiveSupport::TestCase
 
     assert_raise(ActiveRecord::RecordNotUnique) do
       # Create another handle
-      handle2 = Handle.new(prefix: @valid_prefix, repo: @valid_repo, repo_id: 'test')
+      handle2 = @valid_handle
       handle2.save!
       # Attempt to set the suffix to the suffix of the other handle, while
       # skipping model validation
@@ -41,17 +44,20 @@ class HandleTest < ActiveSupport::TestCase
   end
 
   test 'prefix must be a known prefix' do
-    handle = Handle.new(prefix: 'INVALID_PREFIX', repo: @valid_repo, repo_id: 'test')
+    handle = @valid_handle
+    handle.prefix = 'INVALID_PREFIX'
     assert_not handle.valid?
   end
 
   test 'repo must be a known repository' do
-    handle = Handle.new(prefix: @valid_prefix, repo: 'INVALID_REPO', repo_id: 'test')
+    handle = @valid_handle
+    handle.repo = 'INVALID_REPO'
     assert_not handle.valid?
   end
 
   test 'repo_id must be present' do
-    handle = Handle.new(prefix: @valid_prefix, repo: @valid_repo, repo_id: '')
+    handle = @valid_handle
+    handle.repo_id = ''
     assert_not handle.valid?
   end
 end
