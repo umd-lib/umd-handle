@@ -36,6 +36,7 @@ COPY Gemfile* /tmp/
 # Run bundler to install the gems
 WORKDIR /tmp
 RUN bundle config set without 'production' && \
-    bundle install
+    bundle install && \
+    yarn
 
 WORKDIR /
