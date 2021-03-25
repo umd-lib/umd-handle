@@ -98,6 +98,8 @@ pipeline {
       steps {
         sh '''
           ruby -v
+          yarn
+          bundle exec rails db:migrate
         '''
       }
     }
@@ -111,9 +113,6 @@ pipeline {
           # Configure MiniTest to use JUnit-style reporter
           export MINITEST_REPORTER=JUnitReporter
 
-          # Need to do a "db:migrate" so that the "config/initializers/version.rb" file
-          # with APP_VERSION variable gets created
-          bundle exec rails db:migrate
           bundle exec rails test:system test
         '''
       }
