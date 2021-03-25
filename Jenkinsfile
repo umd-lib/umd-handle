@@ -113,6 +113,9 @@ pipeline {
           # Configure MiniTest to use JUnit-style reporter
           export MINITEST_REPORTER=JUnitReporter
 
+          # Update Chrome webdriver, if needed
+          RAILS_ENV=test bundle exec rails webdrivers:chromedriver:update
+
           bundle exec rails test:system test
         '''
       }
