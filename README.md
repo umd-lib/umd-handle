@@ -34,8 +34,10 @@ Requires:
 ```
 > git clone git@github.com:umd-lib/umd-handle
 > cd umd-handle
-> bundle install --without production
+> bundle config set without 'production'
+> bundle install
 > yarn
+> rails db:migrate
 > rails server
 ```
 
