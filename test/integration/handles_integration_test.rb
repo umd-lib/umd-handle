@@ -2,7 +2,8 @@
 
 require 'test_helper'
 
-class HandlesControllerTest < ActionDispatch::IntegrationTest
+# Integration tests for Handles controller
+class HandlesIntegrationTest < ActionDispatch::IntegrationTest
   setup do
     @handle = handles(:one)
   end
