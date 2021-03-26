@@ -63,6 +63,7 @@ group :test do
   gem 'simplecov', '= 0.21.2', require: false
   gem 'simplecov-rcov', '= 0.2.3', require: false
   gem 'faker', '>= 2.17.0'
+  gem 'rails-controller-testing', '>= 1.0.5'
 end
 
 gem 'tzinfo-data', '>= 1.2016.7' # Don't rely on OSX/Linux timezone data
