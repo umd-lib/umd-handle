@@ -79,3 +79,8 @@ Drop, create, migrate, seed and populate sample data
 ```
 > rails db:reset_with_sample_data
 ```
+
+## License
+
+See the [LICENSE.md](LICENSE.md) file for license rights and limitations
+(Apache 2.0).
