@@ -9,6 +9,16 @@ class Handle < ApplicationRecord
   validates :repo_id, presence: true
   validate :validate_url
 
+  # Ransack object to allow "handle" (i.e., "<prefix>/<suffix>") searches
+  ransacker :handle do |parent|
+    Arel::Nodes::InfixOperation.new(
+      '||', Arel::Nodes::InfixOperation.new(
+              '||', parent.table[:prefix], Arel::Nodes.build_quoted('/')
+            ),
+      parent.table[:suffix]
+    )
+  end
+
   # Lock for ensuring synchronization in mint_next_suffix
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
 

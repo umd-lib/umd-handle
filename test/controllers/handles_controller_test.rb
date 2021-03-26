@@ -2,93 +2,39 @@
 
 require 'test_helper'
 
-class HandlesControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @handle = handles(:one)
+class HandlesControllerTest < ActionController::TestCase
+  test 'index -  search panel not expanded when there are no query params' do
+    get :index
+    assert_equal false, assigns(:expand_sort_form)
   end
 
-  test 'should get index' do
-    get handles_url
-    assert_response :success
+  test 'index - search panel expanded when search query params exist' do
+    get :index, params: { q: { repo_cont: 'fcrepo' } }
+    assert_equal true, assigns(:expand_sort_form)
   end
 
-  test 'should get new' do
-    get new_handle_url
-    assert_response :success
+  test 'index -  search panel not expanded when there is only a sort query parameter' do
+    get :index, params: { q: { s: 'url asc' } }
+    assert_equal false, assigns(:expand_sort_form)
   end
 
-  test 'should create handle' do
-    assert_difference('Handle.count') do
-      post handles_url, params: {
-        handle: {
-          description: @handle.description, notes: @handle.notes,
-          prefix: @handle.prefix, repo: @handle.repo, repo_id: @handle.repo_id,
-          url: @handle.url
-        }
-      }
-    end
+  test 'index - show no handles message when no handles displayed' do
+    get :index, params: { q: { repo_cont: 'NON-EXISTENT_REPO' } }
 
-    assert_redirected_to handle_url(Handle.last)
+    # The search should return no results
+    handles = assigns(:handles)
+    assert handles.count.zero?
+
+    assert assigns(:show_no_handles_found)
   end
 
-  test 'should show handle' do
-    get handle_url(@handle)
-    assert_response :success
-  end
+  test 'index - show no handles message now shown when handles displayed' do
+    get :index
 
-  test 'should get edit' do
-    get edit_handle_url(@handle)
-    assert_response :success
-  end
+    # The search should have at least one result
+    handles = assigns(:handles)
+    assert_not handles.count.zero?
 
-  test 'should update handle' do
-    patch handle_url(@handle), params: {
-      handle: {
-        description: @handle.description, notes: @handle.notes,
-        repo: @handle.repo, repo_id: @handle.repo_id,
-        suffix: @handle.suffix, url: @handle.url
-      }
-    }
-    assert_redirected_to handle_url(@handle)
-  end
-
-  test 'should not be able to update prefix of handle' do
-    original_prefix = @handle.prefix
-    new_prefix = 'some_other_prefix'
-    assert_not_equal original_prefix, new_prefix
-
-    patch handle_url(@handle), params: {
-      handle: {
-        prefix: new_prefix
-      }
-    }
-
-    @handle.reload
-    assert_equal original_prefix, @handle.prefix
-    assert_redirected_to handle_url(@handle)
-  end
-
-  test 'should not be able to update suffix of handle' do
-    original_suffix = @handle.suffix
-    new_suffix = Handle.group(:prefix).maximum(:suffix)[@handle.prefix] + 1
-    assert_not_equal original_suffix, new_suffix
-
-    patch handle_url(@handle), params: {
-      handle: {
-        suffix: new_suffix
-      }
-    }
-
-    @handle.reload
-    assert_equal original_suffix, @handle.suffix
-    assert_redirected_to handle_url(@handle)
-  end
-
-  test 'should destroy handle' do
-    assert_difference('Handle.count', -1) do
-      delete handle_url(@handle)
-    end
-
-    assert_redirected_to handles_url
+    assert_not assigns(:show_no_handles_found)
   end
 end
