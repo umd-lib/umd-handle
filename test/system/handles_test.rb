@@ -10,7 +10,7 @@ class HandlesTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit handles_url
-    assert_selector 'h1', text: 'Handles'
+    assert_selector '.h1', text: 'Handles'
   end
 
   test 'creating a Handle' do
