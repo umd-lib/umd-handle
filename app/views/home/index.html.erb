@@ -1,11 +1,22 @@
 <h1>UMD Handle Service</h1>
 
-<p>
-Welcome to the UMD Handle Service.
-<p>
+<div id="home-jumbo" class='jumbotron'>
+  <div class="row">
+  <%= search_form_for @q do |f| %>
+    <div class="form-inline text-center">
+      <%= f.label :handle_cont, 'Handle' %>
+      <%= f.search_field :handle_cont, {placeholder: 'e.g. 1903.1/22', class:'form-control'} %>
+      <%= f.submit url: handles_url, class: 'btn btn-default'  %>
+    </div>
+  <% end %>
+  </div>
+</div>
 
-<p>Available services</p>
-<ul>
-  <li><%= link_to 'List of Handles', handles_path %></li>
-  <li>TODO Search handles</li>
-</ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Other Services</h3>
+  </div>
+  <div class="panel-body">
+    <%= link_to 'Handles List', handles_path, class: "btn btn-default" %>
+  </div>
+</div>

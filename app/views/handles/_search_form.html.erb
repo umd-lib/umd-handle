@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a data-toggle="collapse" href="#collapse1">
+      <h3 class="panel-title">
+        Search
+      </h3>
+    </a>
+  </div>
+  <div id="collapse1" class="panel-collapse collapse <%= 'in' if @expand_sort_form %>">
+    <div class="panel-body">
+      <%= search_form_for @q do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :handle_cont %>
+            <%= f.search_field :handle_cont, class: "form-control" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :url_cont %>
+            <%= f.search_field :url_cont, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :prefix_cont %>
+            <%= f.search_field :prefix_cont, class: "form-control" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :suffix_eq %>
+            <%= f.search_field :suffix_eq, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :repo_cont %>
+            <%= f.search_field :repo_cont, class: "form-control"%>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :repo_id_cont %>
+            <%= f.search_field :repo_id_cont, class: "form-control"%>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :notes_cont %>
+            <%= f.search_field :notes_cont, class: "form-control" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :description_cont %>
+            <%= f.search_field :description_cont, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12" style="margin-top: 10px">
+            <%= f.submit class: 'btn btn-default' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

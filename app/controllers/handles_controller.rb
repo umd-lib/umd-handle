@@ -8,6 +8,26 @@ class HandlesController < ApplicationController
     @q = Handle.ransack(params[:q])
     @q.sorts = 'updated_at desc' if @q.sorts.empty?
     @handles = @q.result.page(params[:page])
+
+    @expand_sort_form = search_params?
+    @show_no_handles_found = @handles.count.zero?
+  end
+
+  # Returns true if the request contains non-empty search parameters,
+  # false otherwise.
+  #
+  # Mainly intended for determining whether the search panel should be shown
+  # as expanded or collapsed
+  def search_params?
+    q = params[:q]
+    return false if q.nil?
+
+    q.each do |key, value|
+      # Skip sort key
+      next if key == 's'
+      return true if value.present?
+    end
+    false
   end
 
   # GET /handles/1 or /handles/1.json
