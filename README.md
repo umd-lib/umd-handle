@@ -12,19 +12,6 @@ This application provides:
 
 ## Quick Start
 
-Prerequisites:
-
-Due to the use of the "mimemagic" gem, install the "shared-mime-info" database:
-
-```
-> brew install shared-mime-info
-```
-
-See:
-
-* <https://github.com/mimemagicrb/mimemagic/issues/98>
-* <https://github.com/rails/rails/issues/41750>
-
 Requires:
 
 * Ruby 2.7.2
