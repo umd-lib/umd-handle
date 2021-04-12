@@ -68,4 +68,8 @@ group :test do
   gem 'rails-controller-testing', '>= 1.0.5'
 end
 
+group :production do
+  gem 'pg', '~> 1.2.3'
+end
+
 gem 'tzinfo-data', '>= 1.2016.7' # Don't rely on OSX/Linux timezone data
