@@ -33,6 +33,8 @@ gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '2.0.0'
 gem 'kaminari', '>=1.2.1'
 gem 'ransack', '>= 2.4.2'
 
+gem 'dotenv-rails', '>= 2.7.6'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
