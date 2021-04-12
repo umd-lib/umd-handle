@@ -33,6 +33,8 @@ gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '2.0.0'
 gem 'kaminari', '>=1.2.1'
 gem 'ransack', '>= 2.4.2'
 
+gem 'dotenv-rails', '>= 2.7.6'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -64,6 +66,10 @@ group :test do
   gem 'simplecov-rcov', '= 0.2.3', require: false
   gem 'faker', '>= 2.17.0'
   gem 'rails-controller-testing', '>= 1.0.5'
+end
+
+group :production do
+  gem 'pg', '~> 1.2.3'
 end
 
 gem 'tzinfo-data', '>= 1.2016.7' # Don't rely on OSX/Linux timezone data
