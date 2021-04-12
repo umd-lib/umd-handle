@@ -273,6 +273,28 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  # Parse SAML attributes as array
+  OneLogin::RubySaml::Attributes.single_value_compatibility = false
+
+  # Saml Configuration
+  config.omniauth :saml,
+    issuer: ENV['SAML_ISSUER'] || ENV['HOST'] ,
+    idp_cert_fingerprint: 'B8:98:58:08:FA:42:BB:D2:86:14:49:61:8F:B9:BF:7B:45:1A:7C:67',
+    idp_sso_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO',
+    uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1',
+    attribute_statements: { email: ['urn:oid:0.9.2342.19200300.100.1.3'], roles: ['urn:oid:1.3.6.1.4.1.5923.1.1.1.7'] },
+    security: {
+      authn_requests_signed: true,
+      want_assertions_signed: true,
+      digest_method: 'http://www.w3.org/2000/09/xmldsig#sha1',
+      signature_method: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
+      embed_sign: false,
+      metadata_signed: false,
+    },
+    private_key: ENV['SAML_SP_PRIVATE_KEY'],
+    certificate: ENV['SAML_SP_CERTIFICATE']
+
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -308,4 +330,5 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  
 end
