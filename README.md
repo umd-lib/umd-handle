@@ -30,6 +30,16 @@ Requires:
 
 <http://localhost:3000/>
 
+## Docker Image
+
+This application provides a "Dockerfile" for generating a Docker image for use
+in production. The Dockerfile provides a sample build command.
+
+The "docker_config" directory contains files copied into the Docker image.
+
+In order to generate "clean" Docker images, the Docker images should be built
+from a fresh clone of the GitHub repository.
+
 ## Docker.ci and Jenkinsfile
 
 The "Dockerfile.ci" file is used to encapsulate the environment needed by the
