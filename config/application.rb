@@ -20,8 +20,12 @@ module UmdHandle
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Configure the hostname
-    config.hosts << /\A10\.\d+\.\d+\.\d+\z/
-    config.hosts << ENV['HOST']
-    config.action_mailer.default_url_options = { host: ENV['HOST'] }
+    # When testing, skip configuration otherwise integration tests will fail
+    # with a 403 Forbidden error
+    unless Rails.env.test?
+      config.hosts << /\A10\.\d+\.\d+\.\d+\z/
+      config.hosts << ENV['HOST']
+      config.action_mailer.default_url_options = { host: ENV['HOST'] }
+    end
   end
 end
