@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!(_opts = {})
     return if user_signed_in?
+
     if request.format == :json
       head :unauthorized
     else
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(_resource)
     '/sign_in.html'
   end
 end
