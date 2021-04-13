@@ -34,7 +34,7 @@ Requires:
 > rails server
 ```
 
-<http://localhost:3000/>
+<http://handle-local:3000/> (**Note:** You need to add `127.0.0.1	handle-local` to your `/etc/hosts` file.)
 
 ## Docker Image
 
