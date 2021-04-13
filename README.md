@@ -17,6 +17,9 @@ Requires:
 * Ruby 2.7.2
 * Node.js v8.16.0 or greater
 * Yarn v1.22.0 or greater
+* SAML Certificate and Private Key from the K8s test namespace
+  - `kubectl -n test get secret umd-handle-common-env-secret  -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode`
+  - `kubectl -n test get secret umd-handle-common-env-secret  -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode`
 
 ```
 > git clone git@github.com:umd-lib/umd-handle
@@ -25,6 +28,9 @@ Requires:
 > bundle install
 > yarn
 > rails db:migrate
+> cp env_example .env
+# Update saml SAML_SP_PRIVATE_KEY & SAML_SP_CERTIFICATE variables with values retrieved from test namespace
+> vim .env
 > rails server
 ```
 
