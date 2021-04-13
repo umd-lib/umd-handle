@@ -20,6 +20,7 @@ module UmdHandle
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Configure the hostname
+    config.hosts << /\A10\.\d+\.\d+\.\d+\z/
     config.hosts << ENV['HOST']
     config.action_mailer.default_url_options = { host: ENV['HOST'] }
   end
