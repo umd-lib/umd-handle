@@ -99,7 +99,7 @@ pipeline {
         sh '''
           ruby -v
           yarn
-          bundle exec rails db:migrate
+          HOST=handle-local bundle exec rails db:migrate
         '''
       }
     }
