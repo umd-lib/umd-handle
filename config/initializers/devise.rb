@@ -276,8 +276,14 @@ Devise.setup do |config|
   # Parse SAML attributes as array
   OneLogin::RubySaml::Attributes.single_value_compatibility = false
 
-  saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
-  saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
+  unless Rails.env.test?
+    if ENV['HOST'].nil?
+      puts('ERROR: Please provide a "HOST" environment variable in the .env file')
+      exit(1)
+    end
+    saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
+    saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
+  end
 
   # Saml Configuration
   config.omniauth :saml,
@@ -334,5 +340,5 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  
+
 end
