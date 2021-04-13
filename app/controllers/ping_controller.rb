@@ -3,6 +3,8 @@
 # Controller for network monitoring to use to determine whether the
 # application is running.
 class PingController < ApplicationController
+  skip_before_action :authenticate_user!
+  
   def verify
     if application_ok?
       render plain: 'Application is OK'
