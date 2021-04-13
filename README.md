@@ -12,29 +12,70 @@ This application provides:
 
 ## Quick Start
 
-Requires:
+Prerequisites:
 
 * Ruby 2.7.2
 * Node.js v8.16.0 or greater
 * Yarn v1.22.0 or greater
-* SAML Certificate and Private Key from the K8s test namespace
-  - `kubectl -n test get secret umd-handle-common-env-secret  -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode`
-  - `kubectl -n test get secret umd-handle-common-env-secret  -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode`
+* Edit the "/etc/hosts" file and add
+
+    ```
+    127.0.0.1 handle-local
+    ```
+
+1) Checkout the application:
 
 ```
 > git clone git@github.com:umd-lib/umd-handle
+```
+
+2) Install the dependencies:
+
+```
 > cd umd-handle
 > bundle config set without 'production'
 > bundle install
 > yarn
-> rails db:migrate
+```
+
+3) Copy the "env_example" file to ".env":
+
+```
 > cp env_example .env
-# Update saml SAML_SP_PRIVATE_KEY & SAML_SP_CERTIFICATE variables with values retrieved from test namespace
-> vim .env
+```
+
+Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
+variables:
+
+```
+> kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode
+> kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode
+```
+
+Edit the '.env" file:
+
+```
+> vi .env
+```
+
+and set the parameters:
+
+| Parameter           | Value                                |
+| ------------------- | ------------------------------------ |
+| HOST                | handle-host                          |
+| SAML_SP_PRIVATE_KEY | (Output from first kubectl command)  |
+| SAML_SP_CERTIFICATE | (Output from second kubectl command) |
+
+4) Migrate the database and run the application:
+
+```
+> rails db:migrate
 > rails server
 ```
 
-<http://handle-local:3000/> (**Note:** You need to add `127.0.0.1	handle-local` to your `/etc/hosts` file.)
+5) In a web browser, go to:
+
+<http://handle-local:3000/>
 
 ## Docker Image
 
