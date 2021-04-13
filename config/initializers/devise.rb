@@ -276,9 +276,13 @@ Devise.setup do |config|
   # Parse SAML attributes as array
   OneLogin::RubySaml::Attributes.single_value_compatibility = false
 
+  saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
+  saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
+
   # Saml Configuration
   config.omniauth :saml,
-    issuer: ENV['SAML_ISSUER'] || ENV['HOST'] ,
+    issuer: saml_host,
+    assertion_consumer_service_url: "#{saml_scheme}://#{saml_host}/users/auth/saml/callback",
     idp_cert_fingerprint: 'B8:98:58:08:FA:42:BB:D2:86:14:49:61:8F:B9:BF:7B:45:1A:7C:67',
     idp_sso_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO',
     uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1',
