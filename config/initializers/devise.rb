@@ -276,34 +276,34 @@ Devise.setup do |config|
   # Parse SAML attributes as array
   OneLogin::RubySaml::Attributes.single_value_compatibility = false
 
-  unless Rails.env.test?
-    if ENV['HOST'].nil?
-      puts('ERROR: Please provide a "HOST" environment variable in the .env file')
-      exit(1)
-    end
-    saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
-    saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
+  if ENV['HOST'].blank?
+    Rails.logger.warn('"HOST" environment variable not defined.')
   end
 
-  # Saml Configuration
-  config.omniauth :saml,
-    issuer: saml_host,
-    assertion_consumer_service_url: "#{saml_scheme}://#{saml_host}/users/auth/saml/callback",
-    idp_cert_fingerprint: 'B8:98:58:08:FA:42:BB:D2:86:14:49:61:8F:B9:BF:7B:45:1A:7C:67',
-    idp_sso_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO',
-    uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1',
-    attribute_statements: { email: ['urn:oid:0.9.2342.19200300.100.1.3'], roles: ['urn:oid:1.3.6.1.4.1.5923.1.1.1.7'] },
-    security: {
-      authn_requests_signed: true,
-      want_assertions_signed: true,
-      digest_method: 'http://www.w3.org/2000/09/xmldsig#sha1',
-      signature_method: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
-      embed_sign: false,
-      metadata_signed: false,
-    },
-    private_key: ENV['SAML_SP_PRIVATE_KEY'],
-    certificate: ENV['SAML_SP_CERTIFICATE']
+  if ENV['HOST'].present?
+    saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
+    saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
+    Rails.logger.info("Configuring SAML authentication: saml_scheme=#{saml_scheme}, saml_host=#{saml_host}")
 
+    # Saml Configuration
+    config.omniauth :saml,
+      issuer: saml_host,
+      assertion_consumer_service_url: "#{saml_scheme}://#{saml_host}/users/auth/saml/callback",
+      idp_cert_fingerprint: 'B8:98:58:08:FA:42:BB:D2:86:14:49:61:8F:B9:BF:7B:45:1A:7C:67',
+      idp_sso_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO',
+      uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1',
+      attribute_statements: { email: ['urn:oid:0.9.2342.19200300.100.1.3'], roles: ['urn:oid:1.3.6.1.4.1.5923.1.1.1.7'] },
+      security: {
+        authn_requests_signed: true,
+        want_assertions_signed: true,
+        digest_method: 'http://www.w3.org/2000/09/xmldsig#sha1',
+        signature_method: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
+        embed_sign: false,
+        metadata_signed: false,
+      },
+      private_key: ENV['SAML_SP_PRIVATE_KEY'],
+      certificate: ENV['SAML_SP_CERTIFICATE']
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

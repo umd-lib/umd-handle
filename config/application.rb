@@ -19,10 +19,14 @@ module UmdHandle
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Configure the hostname
-    # When testing, skip configuration otherwise integration tests will fail
-    # with a 403 Forbidden error
-    unless Rails.env.test?
+    # Configure the hostname, when HOST is provided.
+    # Note: A HOST environment variable (typically provided by a ".env" file)
+    # is REQUIRED when running the application on a server.
+    #
+    # It is not strictly required, because that causes other processes that
+    # don't require a HOST (such as performing the tests, or database
+    # migrations) to fail.
+    if ENV['HOST'].present?
       config.hosts << /\A10\.\d+\.\d+\.\d+\z/
       config.hosts << ENV['HOST']
       config.action_mailer.default_url_options = { host: ENV['HOST'] }
