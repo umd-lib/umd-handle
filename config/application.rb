@@ -26,7 +26,9 @@ module UmdHandle
     # It is not strictly required, because that causes other processes that
     # don't require a HOST (such as performing the tests, or database
     # migrations) to fail.
-    if ENV['HOST'].present?
+    #
+    # HOST should be ignored (and config.hosts not set) when running the tests.
+    if ENV['HOST'].present? && !Rails.env.test?
       config.hosts << /\A10\.\d+\.\d+\.\d+\z/
       config.hosts << ENV['HOST']
       config.action_mailer.default_url_options = { host: ENV['HOST'] }
