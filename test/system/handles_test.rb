@@ -4,8 +4,11 @@ require 'application_system_test_case'
 
 # Integration tests for handles
 class HandlesTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @handle = handles(:one)
+    sign_in users(:one)
   end
 
   test 'visiting the index' do

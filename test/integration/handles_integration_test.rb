@@ -4,8 +4,11 @@ require 'test_helper'
 
 # Integration tests for Handles controller
 class HandlesIntegrationTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @handle = handles(:one)
+    sign_in users(:one)
   end
 
   test 'should get index' do

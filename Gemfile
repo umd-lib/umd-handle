@@ -34,6 +34,9 @@ gem 'kaminari', '>=1.2.1'
 gem 'ransack', '>= 2.4.2'
 
 gem 'dotenv-rails', '>= 2.7.6'
+# AuthNZ
+gem 'devise', '~> 4.7.3'
+gem 'omniauth-saml', '1.10.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

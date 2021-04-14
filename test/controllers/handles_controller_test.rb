@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class HandlesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
+  def setup
+    sign_in users(:one)
+  end
+
   test 'index -  search panel not expanded when there are no query params' do
     get :index
     assert_equal false, assigns(:expand_sort_form)
