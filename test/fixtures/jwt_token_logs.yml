@@ -1,9 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  token: MyString
-  description: MyString
+  token: jkl.mno.pqr
+  description: FixtureTokenTwo
 
 two:
-  token: MyString
-  description: MyString
+  token: jkl.mno.pqr
+  description: FixtureTokenTwo
+

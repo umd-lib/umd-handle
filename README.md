@@ -112,17 +112,51 @@ the `javascript_include_tag` directive with `javascript_pack_tag`.
 
 ## Rake Tasks
 
-Populates the database with sample data
+### Sample Data
+
+#### Populate the database with sample data
 
 ```
 > rails db:populate_sample_data
 ```
 
-Drop, create, migrate, seed and populate sample data
+#### Drop, create, migrate, seed and populate sample data
 
 ```
 > rails db:reset_with_sample_data
 ```
+
+### JWT Tokens
+
+#### Create a JWT token for authorizing access to the REST API
+
+```
+> rails jwt:create_token['<DESCRIPTION>']
+```
+
+where \<DESCRIPTION> is a description of the server/service that will use the
+token.
+
+#### List JWT tokens
+
+```
+> rails jwt:list_tokens
+```
+
+## Production Environment Configuration
+
+Requires:
+
+* Postgres client to be installed (typically "libpq-dev" if a "ruby" Docker
+image is being used).
+
+The application uses the "dotenv" gem to configure the environment.
+When running in Kubernetes, the Kubernetes configuration should provide the
+parameters listed in the "env_example" file as environment variables, set
+to appropriate values.
+
+If running on a stand-alone server, or on a local workstation, a ".env" file
+should be used.
 
 ## License
 
