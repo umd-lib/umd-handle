@@ -44,6 +44,14 @@ Prerequisites:
 > cp env_example .env
 ```
 
+Generate a value for the "JWT_SECRET" variable. This can be any string as long
+as it is "sufficiently long". One way to generate a sufficiently long random
+string is:
+
+```
+> uuidgen | shasum -a256 | cut -d' ' -f1
+```
+
 Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
 variables:
 
@@ -63,6 +71,7 @@ and set the parameters:
 | Parameter           | Value                                |
 | ------------------- | ------------------------------------ |
 | HOST                | handle-host                          |
+| JWT_SECRET          | (Output from the uuidgen command)    |
 | SAML_SP_PRIVATE_KEY | (Output from first kubectl command)  |
 | SAML_SP_CERTIFICATE | (Output from second kubectl command) |
 
@@ -128,6 +137,14 @@ the `javascript_include_tag` directive with `javascript_pack_tag`.
 
 ### JWT Tokens
 
+A list of JWT Tokens that have been issued by the system are stored in the
+"JwtTokenLog" model. This model is not accessible via the web GUI -- all
+interaction takes place via Rake tasks.
+
+The "JwtTokenLog" model is only designed to be a record of issued tokens, to
+help identify which servers need to be updated if the tokens need to be
+invalidated. The "JwtTokenLog" model plays no role in validating tokens.
+
 #### Create a JWT token for authorizing access to the REST API
 
 ```
@@ -157,6 +174,12 @@ to appropriate values.
 
 If running on a stand-alone server, or on a local workstation, a ".env" file
 should be used.
+
+## REST API
+
+The REST API is specified in the OpenAPI v3.0 format:
+
+* v1: [docs/umd-handle-open-api-v1.yml](docs/umd-handle-open-api-v1.yml)
 
 ## License
 
