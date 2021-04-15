@@ -1,12 +1,10 @@
 <% content_for :navbar do %>
   <ul class="nav navbar-nav">
-    <li class="<%= 'active' if current_page?(handles_path) %>"><%= link_to 'Handles List', handles_path %></li>
-    <li>
-      <% if user_signed_in? %>
-      <%= link_to "Sign out", destroy_user_session_path %>
-      <% else %>
-      <%= link_to "Sign in", new_user_session_path, :class => "btn btn-info" %>
-      <% end %>    
-    </li>
+    <% if user_signed_in? %>
+      <li class="<%= 'active' if current_page?(handles_path) %>"><%= link_to 'Handles List', handles_path %></li>
+      <li><%= link_to "Sign out", destroy_user_session_path %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+    <% end %>    
   </ul>
 <% end %>

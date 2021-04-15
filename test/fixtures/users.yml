@@ -2,6 +2,10 @@
 
 one:
   email: one@example.com
+  uid: one@example.com
+  provider: saml
 two:
   email: two@example.com
+  uid: two@example.com
+  provider: saml
 
