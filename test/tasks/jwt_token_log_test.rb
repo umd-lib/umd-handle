@@ -8,6 +8,7 @@ class JwtTokenLogTest < ActiveSupport::TestCase
   setup do
     # Load Rake tasks, but only once
     UmdHandle::Application.load_tasks if Rake::Task.tasks.empty?
+    Rails.application.config.jwt_secret = 'jwt_secret_for_tests'
   end
 
   test 'record of created token is logged' do

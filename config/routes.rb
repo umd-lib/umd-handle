@@ -7,7 +7,15 @@ Rails.application.routes.draw do
     get 'users/sign_in', to: 'users/sessions#new', as: :new_user_session
     get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
   end
-  
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      constraints(prefix: /[^\/]+/) do # Allow prefixes to contain "."
+        get 'handles/:prefix/:suffix' => 'handles#show', as: :handle
+      end
+    end
+  end
+
   resources :handles
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
