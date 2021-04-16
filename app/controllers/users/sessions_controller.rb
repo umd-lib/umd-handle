@@ -10,4 +10,8 @@ class Users::SessionsController < Devise::SessionsController # rubocop:disable S
     login_path = user_omniauth_authorize_path(omniauth_params)
     redirect_to login_path
   end
+
+  def unauthorized
+    render status: :unauthorized
+  end
 end

@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource)
-    '/sign_in.html'
+    "#{user_omniauth_authorize_path}/spslo"
   end
 end

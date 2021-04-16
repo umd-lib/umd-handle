@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController #
     auth_hash = request.env['omniauth.auth']
     email = auth_hash.info.email.first
     roles = sanitize_saml_roles(auth_hash.info.roles || [])
-    render file: 'public/401.html', status: :unauthorized and return unless roles.include?('administrator')
+    redirect_to(unauthorized_user_path) and return unless roles.include?('administrator')
 
     @user = User.create_or_find_by!(email: email, uid: email, provider: 'saml')
     sign_in(@user)

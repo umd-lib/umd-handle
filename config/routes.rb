@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     match '/users/auth/saml/callback', to: 'users/omniauth_callbacks#saml', as: "user_omniauth_callback_saml".to_sym, via: [:get, :post]
     get 'users/sign_in', to: 'users/sessions#new', as: :new_user_session
     get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
+    get 'users/unauthorized', to: 'users/sessions#unauthorized', as: :unauthorized_user
   end
 
   namespace :api, defaults: { format: 'json' } do

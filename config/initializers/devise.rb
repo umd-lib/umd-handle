@@ -291,6 +291,7 @@ Devise.setup do |config|
       assertion_consumer_service_url: "#{saml_scheme}://#{saml_host}/users/auth/saml/callback",
       idp_cert_fingerprint: 'B8:98:58:08:FA:42:BB:D2:86:14:49:61:8F:B9:BF:7B:45:1A:7C:67',
       idp_sso_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO',
+      idp_slo_target_url: 'https://shib.idm.umd.edu/shibboleth-idp/profile/Logout',
       uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1',
       attribute_statements: { email: ['urn:oid:0.9.2342.19200300.100.1.3'], roles: ['urn:oid:1.3.6.1.4.1.5923.1.1.1.7'] },
       security: {
