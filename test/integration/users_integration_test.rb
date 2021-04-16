@@ -35,12 +35,12 @@ class UsersIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to unauthorized_user_path
   end
 
-  test 'redirects users to singed_out page on sign out' do
+  test 'redirects users to saml logout page on sign out' do
     login_user_with_groups(users(:one), [])
     post user_omniauth_callback_saml_path
     get destroy_user_session_path
 
-    assert_redirected_to user_session_ended_path
+    assert_redirected_to "#{user_saml_omniauth_authorize_path}/spslo"
   end
 
   private

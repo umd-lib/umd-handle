@@ -11,9 +11,6 @@ class Users::SessionsController < Devise::SessionsController # rubocop:disable S
     redirect_to login_path
   end
 
-  def signed_out
-  end
-
   def unauthorized
     render status: :unauthorized
   end
