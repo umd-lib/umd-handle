@@ -1,13 +1,23 @@
 # Example .env file
-# Make a copy of this file named ".env" and fill out the properties
+#
+# If running locally on a workstation, make a copy of this file named ".env"
+# and fill out the properties
+#
 # Note: The .env file should _not_ be checked in to Git!
-
-# File containing server-specific Rails environment variables.
-# Do not check into Git!
+#
+# When running in production,  using Kubernetes, the Kubernetes configuration
+# should include the following enviroment variables.
 
 # --- config/secrets.yml
 # Secret key used to verify signed cookies
 SECRET_KEY_BASE=
+
+# --- config/application.rb
+# Secret key used to generate JWT tokens
+# Any value can be used as long as it is "sufficiently long",
+# such as by running the following command in the console:
+# uuidgen | shasum -a256 | cut -d' ' -f1
+JWT_SECRET=
 
 # --- config/database.yml
 # The type of database

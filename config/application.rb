@@ -19,6 +19,12 @@ module UmdHandle
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # The secret used to generate JWT tokens
+    # Any value can be used as long as it is "sufficiently long",
+    # such as by running the following command in the console:
+    #     uuidgen | shasum -a256 | cut -d' ' -f1
+    config.jwt_secret=ENV['JWT_SECRET']
+
     # Configure the hostname, when HOST is provided.
     # Note: A HOST environment variable (typically provided by a ".env" file)
     # is REQUIRED when running the application on a server.

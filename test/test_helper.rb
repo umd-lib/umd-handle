@@ -30,4 +30,13 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  # Sets up JWT authentication to use with controller tests
+  def use_jwt_token
+    jwt_secret = 'jwt_secret_for_tests'
+    payload = { role: 'rest_api' }
+    Rails.application.config.jwt_secret = jwt_secret
+    jwt_token = JWT.encode(payload, jwt_secret, 'HS256')
+    request.headers['Authorization'] = "Bearer #{jwt_token}"
+  end
 end

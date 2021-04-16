@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  token: jkl.mno.pqr
+  description: FixtureTokenTwo
+
+two:
+  token: jkl.mno.pqr
+  description: FixtureTokenTwo
+

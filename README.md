@@ -44,6 +44,14 @@ Prerequisites:
 > cp env_example .env
 ```
 
+Generate a value for the "JWT_SECRET" variable. This can be any string as long
+as it is "sufficiently long". One way to generate a sufficiently long random
+string is:
+
+```
+> uuidgen | shasum -a256 | cut -d' ' -f1
+```
+
 Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
 variables:
 
@@ -63,6 +71,7 @@ and set the parameters:
 | Parameter           | Value                                |
 | ------------------- | ------------------------------------ |
 | HOST                | handle-host                          |
+| JWT_SECRET          | (Output from the uuidgen command)    |
 | SAML_SP_PRIVATE_KEY | (Output from first kubectl command)  |
 | SAML_SP_CERTIFICATE | (Output from second kubectl command) |
 
@@ -112,17 +121,65 @@ the `javascript_include_tag` directive with `javascript_pack_tag`.
 
 ## Rake Tasks
 
-Populates the database with sample data
+### Sample Data
+
+#### Populate the database with sample data
 
 ```
 > rails db:populate_sample_data
 ```
 
-Drop, create, migrate, seed and populate sample data
+#### Drop, create, migrate, seed and populate sample data
 
 ```
 > rails db:reset_with_sample_data
 ```
+
+### JWT Tokens
+
+A list of JWT Tokens that have been issued by the system are stored in the
+"JwtTokenLog" model. This model is not accessible via the web GUI -- all
+interaction takes place via Rake tasks.
+
+The "JwtTokenLog" model is only designed to be a record of issued tokens, to
+help identify which servers need to be updated if the tokens need to be
+invalidated. The "JwtTokenLog" model plays no role in validating tokens.
+
+#### Create a JWT token for authorizing access to the REST API
+
+```
+> rails jwt:create_token['<DESCRIPTION>']
+```
+
+where \<DESCRIPTION> is a description of the server/service that will use the
+token.
+
+#### List JWT tokens
+
+```
+> rails jwt:list_tokens
+```
+
+## Production Environment Configuration
+
+Requires:
+
+* Postgres client to be installed (typically "libpq-dev" if a "ruby" Docker
+image is being used).
+
+The application uses the "dotenv" gem to configure the environment.
+When running in Kubernetes, the Kubernetes configuration should provide the
+parameters listed in the "env_example" file as environment variables, set
+to appropriate values.
+
+If running on a stand-alone server, or on a local workstation, a ".env" file
+should be used.
+
+## REST API
+
+The REST API is specified in the OpenAPI v3.0 format:
+
+* v1: [docs/umd-handle-open-api-v1.yml](docs/umd-handle-open-api-v1.yml)
 
 ## License
 
