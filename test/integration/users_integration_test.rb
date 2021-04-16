@@ -40,7 +40,7 @@ class UsersIntegrationTest < ActionDispatch::IntegrationTest
     post user_omniauth_callback_saml_path
     get destroy_user_session_path
 
-    assert_redirected_to "#{user_saml_omniauth_authorize_path}/spslo"
+    assert_redirected_to "#{user_omniauth_authorize_path}/spslo"
   end
 
   private
