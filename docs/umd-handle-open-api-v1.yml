@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: umd-handle API
   description: The umd-handle service API
-  
+
 servers:
   - url: https://handle.lib.umd.edu/api/v1
 
@@ -18,7 +18,7 @@ components:
     UnauthorizedError:
       description: Access token is missing or invalid
 security:
-  - bearerAuth: [] 
+  - bearerAuth: []
 
 tags:
 - name: "handles"
@@ -72,27 +72,37 @@ paths:
         content:
           application/json:
             schema:
-              type: object 
+              type: object
               required:
+                - prefix
                 - url
                 - repo
                 - repo_id
               properties:
+                prefix:
+                  description: The Handle.net prefix to use for the resource
+                  type: string
+                  example: '1903.1'
                 url:
                   description: The URL the handle should resolve to
                   type: string
+                  example: 'http://example.com/resource/abc/123'
                 repo:
                   description: The source repository for the resource
                   type: string
+                  example: 'aspace'
                 repo_id:
                   description: The internal id of the resource in the source repository
                   type: string
+                  example: 'abc:123'
                 description:
                   description: A short human-readable description of the resource, typically the title of the resource
                   type: string
+                  example: 'An example resource'
                 notes:
                   description: Any additional notes about the resource
                   type: string
+                  example: 'An example resource used in demonstrating the REST API.'
       responses:
         '200':
           description: 'Successful creation of a handle'
@@ -101,14 +111,30 @@ paths:
               schema:
                 type: object
                 required:
-                  - prefix
+                  - request
                   - suffix
-                  - proxy_url
+                  - handle_url
                 properties:
-                  prefix:
-                    description: The handle prefix
-                    example: '1903.1'
-                    type: string
+                  request:
+                    type: object
+                    description: The parameters provided in the request
+                    properties:
+                      prefix:
+                        description: The prefix provided in the request.
+                        type: string
+                        example: '1903.1'
+                      repo:
+                        description: The repo provided in the request.
+                        type: string
+                        example: 'aspace'
+                      repo_id:
+                        description: The repo_id provided in the request.
+                        type: string
+                        example: 'abc:123'
+                      url:
+                        description: The resource URL provided in the request.
+                        type: string
+                        example: 'http://example.com/resource/abc/123'
                   suffix:
                     description: The handle suffix
                     example: '1'
@@ -119,6 +145,19 @@ paths:
                     type: string
         '400':
           description: 'Unsuccessful request due to invalid parameters, such as missing parameters, or unknown repository.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    description: A list of error messages
+                    example: ["Prefix 'NON-EXISTENT PREFIX' is not a valid prefix"]
+                    type: array
+                    items:
+                      type: string
+
+
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-        
+

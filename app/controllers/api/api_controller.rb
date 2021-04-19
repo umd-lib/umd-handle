@@ -3,6 +3,9 @@
 module Api
   # Base class for REST API Controllers
   class ApiController < ActionController::Base # rubocop:disable Rails/ApplicationController
+    # Disable CSRF for API requests (see https://stackoverflow.com/a/34252150)
+    protect_from_forgery with: :null_session
+
     before_action :authenticate_request!
 
     def authenticate_request!(_opts = {})
@@ -19,11 +22,11 @@ module Api
     def get_jwt_token(request)
       # Retrieve JWT token from header
       auth_header = request.authorization
-      raise ArgumentError('Authorization header not provided in request') unless auth_header
+      raise ArgumentError, 'Authorization header not provided in request' unless auth_header
 
       pattern = /^Bearer /
       unless auth_header.match(pattern)
-        raise ArgumentError("Authorization header format not recognized: #{auth_header}")
+        raise ArgumentError, "Authorization header format not recognized: #{auth_header}"
       end
 
       auth_header.gsub(pattern, '')
@@ -36,6 +39,7 @@ module Api
       jwt_secret = Rails.application.config.jwt_secret
 
       decoded_token = JWT.decode(jwt_token, jwt_secret, true, { algorithm: 'HS256' })
+
       if decoded_token && decoded_token[0]
         payload = decoded_token[0]
         role = payload['role']

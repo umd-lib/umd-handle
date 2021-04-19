@@ -68,12 +68,13 @@ Edit the '.env" file:
 
 and set the parameters:
 
-| Parameter           | Value                                |
-| ------------------- | ------------------------------------ |
-| HOST                | handle-host                          |
-| JWT_SECRET          | (Output from the uuidgen command)    |
-| SAML_SP_PRIVATE_KEY | (Output from first kubectl command)  |
-| SAML_SP_CERTIFICATE | (Output from second kubectl command) |
+| Parameter              | Value                                |
+| ---------------------- | ------------------------------------ |
+| HANDLE_HTTP_PROXY_BASE | (For local development, an arbitrary URL such as "http://hdl-local.lib.umd.edu/") |
+| HOST                   | handle-local                         |
+| JWT_SECRET             | (Output from the uuidgen command)    |
+| SAML_SP_PRIVATE_KEY    | (Output from first kubectl command)  |
+| SAML_SP_CERTIFICATE    | (Output from second kubectl command) |
 
 4) Migrate the database and run the application:
 
