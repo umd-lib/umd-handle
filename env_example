@@ -19,6 +19,10 @@ SECRET_KEY_BASE=
 # uuidgen | shasum -a256 | cut -d' ' -f1
 JWT_SECRET=
 
+# The base URL (including a trailing slash) for the handle proxy server
+# associated with this application. For example: "https://hdl-test.lib.umd.edu/"
+HANDLE_HTTP_PROXY_BASE=
+
 # --- config/database.yml
 # The type of database
 PROD_DATABASE_ADAPTER=postgresql

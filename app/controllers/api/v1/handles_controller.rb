@@ -12,8 +12,17 @@ module Api
       end
 
       def create
-        respond_with Handle.create(params[:handle])
+        @handle = Handle.new(handle_params)
+
+        render json: { errors: @handle.errors.full_messages }, status: :bad_request unless @handle.save
       end
+
+      private
+
+        # Only allow a list of trusted parameters through.
+        def handle_params
+          params.require(:handle).permit(:prefix, :url, :repo, :repo_id, :description, :notes)
+        end
     end
   end
 end

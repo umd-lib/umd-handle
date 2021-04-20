@@ -25,6 +25,11 @@ module UmdHandle
     #     uuidgen | shasum -a256 | cut -d' ' -f1
     config.jwt_secret=ENV['JWT_SECRET']
 
+    # The base URL (including a trailing slash) for the handle proxy server
+    # associated with this application.
+    # For example: "https://hdl-test.lib.umd.edu/"
+    config.handle_http_proxy_base=ENV['HANDLE_HTTP_PROXY_BASE']
+
     # Configure the hostname, when HOST is provided.
     # Note: A HOST environment variable (typically provided by a ".env" file)
     # is REQUIRED when running the application on a server.

@@ -33,6 +33,15 @@ module Api
       assert_equal 401, response.status
     end
 
+    test 'JWT tokens with empty payload are rejected' do
+      payload = {}
+      jwt_token = JWT.encode(payload, @jwt_secret, 'HS256')
+      request.headers['Authorization'] = "Bearer #{jwt_token}"
+
+      get :show, params: @path_params, format: :json
+      assert_equal 401, response.status
+    end
+
     test 'requests without expected JWT payload in the Authorization header are rejected' do
       payload = { foo: 'bar' }
       jwt_token = JWT.encode(payload, @jwt_secret, 'HS256')

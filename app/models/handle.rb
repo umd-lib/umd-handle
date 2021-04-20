@@ -6,7 +6,7 @@ class Handle < ApplicationRecord
   validate :validate_prefix
   validates :suffix, uniqueness: { scope: :prefix }
   validate :validate_repo
-  validates :repo_id, presence: true
+  validates :repo_id, presence: { message: 'is required' }
   validate :validate_url
 
   # Ransack object to allow "handle" (i.e., "<prefix>/<suffix>") searches
@@ -23,14 +23,26 @@ class Handle < ApplicationRecord
   @@semaphore = Mutex.new # rubocop:disable Style/ClassVars
 
   def validate_prefix
+    # Using this method instead of "presence" and "inclusion" validatons
+    # so "Handle.prefixes" does not have to be place above validations in the
+    # source code.
+    errors.add(:prefix, 'is required') and return if prefix.nil?
+
     errors.add(:prefix, "'#{prefix}' is not a valid prefix") unless Handle.prefixes.include?(prefix)
   end
 
   def validate_repo
+    # Using this method instead of "presence" and "inclusion" validatons
+    # so "Handle.prefixes" does not have to be place above validations in the
+    # source code.
+    errors.add(:repo, 'is required') and return if repo.nil?
+
     errors.add(:repo, "'#{repo}' is not a valid repository") unless Handle.repos.include?(repo)
   end
 
   def validate_url
+    errors.add(:url, 'is required') and return if url.nil?
+
     valid = false
     begin
       uri = URI.parse(url)
@@ -52,6 +64,11 @@ class Handle < ApplicationRecord
 
   def to_handle_string
     "#{prefix}/#{suffix}"
+  end
+
+  # Returns the fully-qualified URL to use as the handle URL
+  def handle_url
+    "#{Rails.application.config.handle_http_proxy_base}#{prefix}/#{suffix}"
   end
 
   private
