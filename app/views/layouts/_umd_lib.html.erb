@@ -2,10 +2,10 @@
 <html>
 <head>
   <title><%= yield(:app_name) %></title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= yield :additional_head_content %>
 </head>
 <body role="document">
