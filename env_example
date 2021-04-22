@@ -53,6 +53,11 @@ PROD_DATABASE_POOL=10
 # Hostname of the application
 HOST=handle-local
 
+# --- config/application.rb
+# When running in Kubernetes, the internal Kubernetes host name for the pod
+# to allow cross-stack HTTP communication.
+K8S_INTERNAL_HOST=umd-handle-app
+
 # --- config/initializers/devise.rb
 
 # SAML SP's Signing Key
