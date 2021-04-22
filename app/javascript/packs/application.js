@@ -12,3 +12,7 @@ import 'bootstrap/dist/js/bootstrap';
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// The following is needed to reset the authenticity token on forms
+// when using TurboLinks. See https://stackoverflow.com/a/64257384
+$(document).on('turbolinks:load', function(){ $.rails.refreshCSRFTokens(); });
