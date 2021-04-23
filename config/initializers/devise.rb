@@ -281,7 +281,7 @@ Devise.setup do |config|
   end
 
   if ENV['HOST'].present?
-    saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:3000" : ENV['HOST']
+    saml_host = (ENV['HOST'].include? "local") ? "#{ENV['HOST']}:#{ENV.fetch("PORT") { 3000 }}" : ENV['HOST']
     saml_scheme = (ENV['HOST'].include? "local") ? "http" : "https"
     Rails.logger.info("Configuring SAML authentication: saml_scheme=#{saml_scheme}, saml_host=#{saml_host}")
 
