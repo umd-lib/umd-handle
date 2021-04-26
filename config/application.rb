@@ -42,6 +42,7 @@ module UmdHandle
     if ENV['HOST'].present? && !Rails.env.test?
       config.hosts << /\A10\.\d+\.\d+\.\d+\z/
       config.hosts << ENV['HOST']
+      config.hosts << ENV['K8S_INTERNAL_HOST'] if ENV['K8S_INTERNAL_HOST']
       config.action_mailer.default_url_options = { host: ENV['HOST'] }
     end
   end
