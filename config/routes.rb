@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       constraints(prefix: /[^\/]+/) do # Allow prefixes to contain "."
         get 'handles/:prefix/:suffix' => 'handles#show', as: :handle
         post 'handles' => 'handles#create', as: :new_handle
+        get 'handles/exists' => 'handles#exists', as: :handle_exists
       end
     end
   end
