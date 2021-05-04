@@ -16,21 +16,21 @@ module Api
 
     test 'requests without Authorization header are rejected' do
       get :show, params: @path_params, format: :json
-      assert_equal 401, response.status
+      assert_response :unauthorized
     end
 
     test 'requests without "Bearer" in the Authorization header are rejected' do
       request.headers['Authorization'] = 'NOT_VALID'
 
       get :show, params: @path_params, format: :json
-      assert_equal 401, response.status
+      assert_response :unauthorized
     end
 
     test 'requests without valid JWT in the Authorization header are rejected' do
       request.headers['Authorization'] = 'Bearer NOT.VALID.JWT'
 
       get :show, params: @path_params, format: :json
-      assert_equal 401, response.status
+      assert_response :unauthorized
     end
 
     test 'JWT tokens with empty payload are rejected' do
@@ -39,7 +39,7 @@ module Api
       request.headers['Authorization'] = "Bearer #{jwt_token}"
 
       get :show, params: @path_params, format: :json
-      assert_equal 401, response.status
+      assert_response :unauthorized
     end
 
     test 'requests without expected JWT payload in the Authorization header are rejected' do
@@ -48,7 +48,7 @@ module Api
       request.headers['Authorization'] = "Bearer #{jwt_token}"
 
       get :show, params: @path_params, format: :json
-      assert_equal 401, response.status
+      assert_response :unauthorized
     end
 
     test 'requests with expected JWT payload in the Authorization header are accepted' do
@@ -57,7 +57,7 @@ module Api
       request.headers['Authorization'] = "Bearer #{jwt_token}"
 
       get :show, params: @path_params, format: :json
-      assert_equal 200, response.status
+      assert_response :success
     end
   end
 end
