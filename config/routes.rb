@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         get 'handles/:prefix/:suffix' => 'handles#show', as: :handle
         post 'handles' => 'handles#create', as: :new_handle
         get 'handles/exists' => 'handles#exists', as: :handle_exists
+        get 'handles/info' => 'handles#info', as: :handle_info
       end
     end
   end
