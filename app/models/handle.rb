@@ -2,7 +2,7 @@
 
 # Maps a handle URL to the actual resource URL
 class Handle < ApplicationRecord
-  around_create :mint_next_suffix
+  around_create :mint_next_suffix if :suffix.blank?
   validate :validate_prefix
   validates :suffix, uniqueness: { scope: :prefix }
   validate :validate_repo

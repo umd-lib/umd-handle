@@ -161,6 +161,20 @@ token.
 > rails jwt:list_tokens
 ```
 
+### Importing handles from CSV
+
+The import csv functionality can be used to import handles from a csv file.
+If a handle already exists, it is skipped from importing, and a message is
+logged.
+
+#### Import CSV
+
+```
+> rails "handle:csv_import[<FILE_PATH>]"
+```
+
+where \<FILE_PATH> is path of the csv file to be imported.
+
 ## Production Environment Configuration
 
 Requires:
