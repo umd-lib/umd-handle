@@ -26,3 +26,8 @@
   cursor: not-allowed;
   background-color: #fff;
 }
+
+// Override default setting in app/assets/stylesheets/scaffolds.scss
+a:hover {
+  background-color: unset;
+}
