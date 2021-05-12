@@ -38,7 +38,7 @@
       <% @handles.each do |handle| %>
         <tr>
           <td><%= link_to handle.to_handle_string, handle %></td>
-          <td><%= handle.url %></td>
+          <td><%= link_to nil, handle.url %></td>
           <td><%= handle.repo %></td>
           <td><%= handle.repo_id %></td>
           <td title="<%= handle.updated_at.to_formatted_s %>"><%= time_ago_in_words(handle.updated_at) %> ago</td>
