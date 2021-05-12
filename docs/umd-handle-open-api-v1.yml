@@ -61,6 +61,168 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           description: Handle not found
+  /handles/exists:
+    get:
+      tags:
+      - "handles"
+      description: Returns whether a handle exists for the given parameters
+      operationId: "exists"
+      parameters:
+        - name: repo
+          in: query
+          required: true
+          description: The repository of the resource
+          schema:
+            type: string
+        - name: repo_id
+          in: query
+          required: true
+          description: The identifier for the resource in the respository
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - request
+                  - exists
+                properties:
+                  request:
+                    type: object
+                    description: The parameters provided in the request
+                    properties:
+                      repo:
+                        description: The repo provided in the request.
+                        type: string
+                        example: 'aspace'
+                      repo_id:
+                        description: The repo_id provided in the request.
+                        type: string
+                        example: 'abc:123'
+                  exists:
+                    description: Flag indicating whether a handle exists
+                    example: true
+                    type: boolean
+                  handle_url:
+                    description: The URL for the handle, if one exists
+                    example: 'https://hdl.handle.net/1903.1/1'
+                    type: string
+                  prefix:
+                    description: The handle prefix, if one exists
+                    type: string
+                    example: '1903.1'
+                  suffix:
+                    description: The handle suffix, if one exists
+                    type: string
+                    example: '1'
+                  url:
+                    description: The URL of the resource, if one exists
+                    type: string
+                    example: 'http://example.com/resource/abc/123'
+        '400':
+          description: 'Unsuccessful request due to invalid parameters, such as missing parameters, or unknown repository.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    description: A list of error messages
+                    example: ["'repo_id' parameter is required"]
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /handles/info:
+    get:
+      tags:
+      - "handles"
+      description: Returns additional information about a handle
+      operationId: "info"
+      parameters:
+        - name: prefix
+          in: query
+          required: true
+          description: The handle prefix
+          schema:
+            type: string
+        - name: suffix
+          in: query
+          required: true
+          description: The handle suffix
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - request
+                  - exists
+                properties:
+                  request:
+                    type: object
+                    description: The parameters provided in the request
+                    properties:
+                      prefix:
+                        description: The prefix provided in the request.
+                        type: string
+                        example: '1903.1'
+                      suffix:
+                        description: The suffix provided in the request.
+                        type: string
+                        example: '1'
+                  exists:
+                    description: Flag indicating whether a handle exists
+                    example: true
+                    type: boolean
+                  handle_url:
+                    description: The URL for the handle, if one exists
+                    example: 'https://hdl.handle.net/1903.1/1'
+                    type: string
+                  prefix:
+                    description: The handle prefix, if one exists
+                    type: string
+                    example: '1903.1'
+                  suffix:
+                    description: The handle suffix, if one exists
+                    type: string
+                    example: '1'
+                  url:
+                    description: The URL of the resource, if one exists
+                    type: string
+                    example: 'http://example.com/resource/abc/123'
+                  repo:
+                    description: The source repository for the resource, if one exists
+                    type: string
+                    example: 'fedora2'
+                  repo_id:
+                    description: The internal id of the resource in the source repository, if one exists
+                    type: string
+                    example: 'abc:123'
+        '400':
+          description: 'Unsuccessful request due to invalid parameters, such as missing parameters, or unknown repository.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    description: A list of error messages
+                    example: ["'prefix' parameter is required"]
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /handles:
     post:
       tags:

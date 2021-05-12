@@ -17,6 +17,32 @@ module Api
         render json: { errors: @handle.errors.full_messages }, status: :bad_request unless @handle.save
       end
 
+      def exists
+        @repo = params[:repo]
+        @repo_id = params[:repo_id]
+
+        @errors = []
+        @errors << '"repo" is required' if @repo.blank?
+        @errors << '"repo_id" is required' if @repo_id.blank?
+        render json: { errors: @errors },  status: :bad_request and return unless @errors.empty?
+
+        @handle = Handle.find_by repo: @repo, repo_id: @repo_id
+        @exists = !@handle.nil?
+      end
+
+      def info
+        @prefix = params[:prefix]
+        @suffix = params[:suffix]
+
+        @errors = []
+        @errors << '"prefix" is required' if @prefix.blank?
+        @errors << '"suffix" is required' if @suffix.blank?
+        render json: { errors: @errors }, status: :bad_request and return unless @errors.empty?
+
+        @handle = Handle.find_by prefix: @prefix, suffix: @suffix
+        @exists = !@handle.nil?
+      end
+
       private
 
         # Only allow a list of trusted parameters through.

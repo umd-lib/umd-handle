@@ -5,7 +5,7 @@ one:
   suffix: 1
   url: http://example.com/test/one
   repo: aspace
-  repo_id: MyString
+  repo_id: aspace_pid::1
   description: MyString
   notes: MyText
 
@@ -14,6 +14,6 @@ two:
   suffix: 2
   url: http://example.com/test/two
   repo: avalon
-  repo_id: MyString
+  repo_id: avalon_pid::2
   description: MyString
   notes: MyText
