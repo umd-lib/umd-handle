@@ -1,0 +1,4 @@
+prefix,suffix,url,repo,repo_id,description,notes
+1903.1,1,http://example.com/,fedora2,umd:1,,duplicate handle test item 1
+1903.1,2,http://example.com/,fedora2,umd:1,,duplicate handle test item 2
+1903.1,1,http://example.com/,fedora2,umd:1,,duplicate handle test item 3
