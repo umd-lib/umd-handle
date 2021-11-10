@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       constraints(prefix: /[^\/]+/) do # Allow prefixes to contain "."
         get 'handles/:prefix/:suffix' => 'handles#show', as: :handle
+        patch 'handles/:prefix/:suffix' => 'handles#update', as: :update_handle
         post 'handles' => 'handles#create', as: :new_handle
         get 'handles/exists' => 'handles#exists', as: :handle_exists
         get 'handles/info' => 'handles#info', as: :handle_info
