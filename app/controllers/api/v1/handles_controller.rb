@@ -22,7 +22,7 @@ module Api
         @handle = Handle.find_by(suffix: params[:suffix], prefix: params[:prefix])
         Rails.logger.info("Updating handle #{@handle}, is nil? #{@handle.nil?}")
         if @handle.nil?
-          render json: {}, status: :not_found 
+          render json: {}, status: :not_found
         else
           @handle.update(handle_update_params)
           render json: { errors: @handle.errors.full_messages }, status: :bad_request unless @handle.save
@@ -64,7 +64,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def handle_update_params
-          params.require([:prefix, :suffix])
+          params.require(%i[prefix suffix])
           params.permit(:url, :repo, :repo_id, :description, :notes)
         end
     end
