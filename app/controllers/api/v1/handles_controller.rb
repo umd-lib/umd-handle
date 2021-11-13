@@ -17,6 +17,18 @@ module Api
         render json: { errors: @handle.errors.full_messages }, status: :bad_request unless @handle.save
       end
 
+      # PATCH /handles/prefix/suffix
+      def update
+        @handle = Handle.find_by(suffix: params[:suffix], prefix: params[:prefix])
+        Rails.logger.info("Updating handle #{@handle}, is nil? #{@handle.nil?}")
+        if @handle.nil?
+          render json: {}, status: :not_found
+        else
+          @handle.update(handle_update_params)
+          render json: { errors: @handle.errors.full_messages }, status: :bad_request unless @handle.save
+        end
+      end
+
       def exists
         @repo = params[:repo]
         @repo_id = params[:repo_id]
@@ -48,6 +60,12 @@ module Api
         # Only allow a list of trusted parameters through.
         def handle_params
           params.require(:handle).permit(:prefix, :url, :repo, :repo_id, :description, :notes)
+        end
+
+        # Only allow a list of trusted parameters through.
+        def handle_update_params
+          params.require(%i[prefix suffix])
+          params.permit(:url, :repo, :repo_id, :description, :notes)
         end
     end
   end
