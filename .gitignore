@@ -44,3 +44,6 @@ coverage
 
 # Ignore environment configuration
 .env
+
+# Ignore bundles
+/vendor/bundle --local
