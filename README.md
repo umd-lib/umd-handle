@@ -23,69 +23,76 @@ Prerequisites:
     127.0.0.1 handle-local
     ```
 
-1) Checkout the application:
+Procedure:
 
-```
-> git clone git@github.com:umd-lib/umd-handle
-```
+1. Checkout the application:
 
-2) Install the dependencies:
+    ```bash
+    git clone git@github.com:umd-lib/umd-handle
+    ```
 
-```
-> cd umd-handle
-> bundle config set without 'production'
-> bundle install
-> yarn
-```
+2. Install the dependencies:
 
-3) Copy the "env_example" file to ".env":
+    ```bash
+    cd umd-handle
+    bundle config set without 'production'
+    bundle install
+    yarn install -std=c++17
+    NODE_OPTIONS=--openssl-legacy-provider bundle exec rails webpacker:compile
+    ```
 
-```
-> cp env_example .env
-```
+    See [nodejs GitHub issue #38367](https://github.com/nodejs/node/issues/38367#issuecomment-902163778)
+    for an explanation of the need for the `-std=c++17` flag.
 
-Generate a value for the "JWT_SECRET" variable. This can be any string as long
-as it is "sufficiently long". One way to generate a sufficiently long random
-string is:
+    See [webpack GitHub issue #14532](https://github.com/webpack/webpack/issues/14532#issuecomment-947012063)
+    for an explanation of the `NODE_OPTIONS=--open-ssl-legacy-provider ` flag.
 
-```
-> uuidgen | shasum -a256 | cut -d' ' -f1
-```
+3. Copy the "env_example" file to ".env":
 
-Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
-variables:
+    ```bash
+    cp env_example .env
+    ```
 
-```
-> kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode
-> kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode
-```
+    Generate a value for the "JWT_SECRET" variable. This can be any string as long
+    as it is "sufficiently long". One way to generate a sufficiently long random
+    string is:
 
-Edit the '.env" file:
+    ```bash
+    uuidgen | shasum -a256 | cut -d' ' -f1
+    ```
 
-```
-> vi .env
-```
+    Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
+    variables:
 
-and set the parameters:
+    ```bash
+    kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode
+    kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode
+    ```
 
-| Parameter              | Value                                |
-| ---------------------- | ------------------------------------ |
-| HANDLE_HTTP_PROXY_BASE | (For local development, an arbitrary URL such as "http://hdl-local.lib.umd.edu/") |
-| HOST                   | handle-local                         |
-| JWT_SECRET             | (Output from the uuidgen command)    |
-| SAML_SP_PRIVATE_KEY    | (Output from first kubectl command)  |
-| SAML_SP_CERTIFICATE    | (Output from second kubectl command) |
+4. Edit the '.env" file:
 
-4) Migrate the database and run the application:
+    ```bash
+    vi .env
+    ```
 
-```
-> rails db:migrate
-> rails server
-```
+    and set the parameters:
 
-5) In a web browser, go to:
+    | Parameter              | Value                                |
+    | ---------------------- | ------------------------------------ |
+    | HANDLE_HTTP_PROXY_BASE | (For local development, an arbitrary URL such as "http://hdl-local.lib.umd.edu/") |
+    | HOST                   | handle-local                         |
+    | JWT_SECRET             | (Output from the uuidgen command)    |
+    | SAML_SP_PRIVATE_KEY    | (Output from first kubectl command)  |
+    | SAML_SP_CERTIFICATE    | (Output from second kubectl command) |
 
-<http://handle-local:3000/>
+5. Migrate the database and run the application:
+
+    ```bash
+    bundle exec rails db:migrate
+    bundle exec rails server
+    ```
+
+6. In a web browser, go to <http://handle-local:3000/>
 
 ## Docker Image
 
