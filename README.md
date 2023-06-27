@@ -88,8 +88,8 @@ Procedure:
 5. Migrate the database and run the application:
 
     ```bash
-    rails db:migrate
-    rails server
+    bundle exec rails db:migrate
+    bundle exec rails server
     ```
 
 6. In a web browser, go to <http://handle-local:3000/>
