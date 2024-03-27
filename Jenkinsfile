@@ -141,7 +141,9 @@ pipeline {
       post {
         always {
           // Collect Rubocop reports
-          recordIssues(tools: [ruboCop(reportEncoding: 'UTF-8')], unstableTotalAll: 1)
+          recordIssues(tools: [ruboCop(reportEncoding: 'UTF-8')],
+                       qualityGates: [[threshold: 1, type: 'TOTAL', criticality: 'UNSTABLE']]
+          )
 
           // Collect coverage reports
           step([$class: 'RcovPublisher', reportDir: 'coverage/rcov/'])
