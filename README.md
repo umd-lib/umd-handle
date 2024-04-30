@@ -19,7 +19,7 @@ Prerequisites:
 * Yarn v1.22.0 or greater
 * Edit the "/etc/hosts" file and add
 
-    ```
+    ```text
     127.0.0.1 handle-local
     ```
 
@@ -27,13 +27,13 @@ Procedure:
 
 1. Checkout the application:
 
-    ```bash
+    ```zsh
     git clone git@github.com:umd-lib/umd-handle
     ```
 
 2. Install the dependencies:
 
-    ```bash
+    ```zsh
     cd umd-handle
     bundle config set without 'production'
     bundle install
@@ -45,11 +45,11 @@ Procedure:
     for an explanation of the need for the `-std=c++17` flag.
 
     See [webpack GitHub issue #14532](https://github.com/webpack/webpack/issues/14532#issuecomment-947012063)
-    for an explanation of the `NODE_OPTIONS=--open-ssl-legacy-provider ` flag.
+    for an explanation of the `NODE_OPTIONS=--open-ssl-legacy-provider` flag.
 
 3. Copy the "env_example" file to ".env":
 
-    ```bash
+    ```zsh
     cp env_example .env
     ```
 
@@ -57,21 +57,21 @@ Procedure:
     as it is "sufficiently long". One way to generate a sufficiently long random
     string is:
 
-    ```bash
+    ```zsh
     uuidgen | shasum -a256 | cut -d' ' -f1
     ```
 
     Determine the values for the "SAML_SP_PRIVATE_KEY" and "SAML_SP_CERTIFICATE"
     variables:
 
-    ```bash
+    ```zsh
     kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_PRIVATE_KEY}' | base64 --decode
     kubectl -n test get secret umd-handle-common-env-secret -o jsonpath='{.data.SAML_SP_CERTIFICATE}' | base64 --decode
     ```
 
 4. Edit the '.env" file:
 
-    ```bash
+    ```zsh
     vi .env
     ```
 
@@ -87,10 +87,25 @@ Procedure:
 
 5. Migrate the database and run the application:
 
-    ```bash
+    ```zsh
     bundle exec rails db:migrate
     bundle exec rails server
     ```
+
+    ----
+    ℹ️ **Note:** When running locally with other Rails applications (such as
+    Archelon) that also run on port 3000, the port can be changed using the
+    "--port" argument, i.e.:
+
+    ```zsh
+    bundle exec rails server --port=3001
+    ```
+
+    When running on a different port the application GUI will not be accessible,
+    as it will not be possible to login via CAS. The backend API (which uses
+    JWT tokens), will be available.
+
+    ----
 
 6. In a web browser, go to <http://handle-local:3000/>
 
@@ -133,14 +148,14 @@ the `javascript_include_tag` directive with `javascript_pack_tag`.
 
 #### Populate the database with sample data
 
-```
-> rails db:populate_sample_data
+```zsh
+rails db:populate_sample_data
 ```
 
 #### Drop, create, migrate, seed and populate sample data
 
-```
-> rails db:reset_with_sample_data
+```zsh
+rails db:reset_with_sample_data
 ```
 
 ### JWT Tokens
@@ -155,8 +170,8 @@ invalidated. The "JwtTokenLog" model plays no role in validating tokens.
 
 #### Create a JWT token for authorizing access to the REST API
 
-```
-> rails jwt:create_token['<DESCRIPTION>']
+```zsh
+rails 'jwt:create_token["<DESCRIPTION>"]'
 ```
 
 where \<DESCRIPTION> is a description of the server/service that will use the
@@ -164,8 +179,8 @@ token.
 
 #### List JWT tokens
 
-```
-> rails jwt:list_tokens
+```zsh
+rails jwt:list_tokens
 ```
 
 ### Importing handles from CSV
@@ -176,8 +191,8 @@ logged.
 
 #### Import CSV
 
-```
-> rails "handle:csv_import[<FILE_PATH>]"
+```zsh
+rails 'handle:csv_import[<FILE_PATH>]'
 ```
 
 where \<FILE_PATH> is path of the csv file to be imported.
