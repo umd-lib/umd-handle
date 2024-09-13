@@ -35,7 +35,7 @@ gem 'ransack', '>= 2.4.2'
 
 gem 'dotenv-rails', '>= 2.7.6'
 # AuthNZ
-gem 'devise', '~> 4.7.3'
+gem 'devise', '~> 4.8.0'
 gem 'omniauth-saml', '2.1.0'
 
 # Specifying the ruby saml due to this CVE: https://github.com/advisories/GHSA-jw9c-mfg7-9rx2
