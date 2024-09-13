@@ -35,8 +35,11 @@ gem 'ransack', '>= 2.4.2'
 
 gem 'dotenv-rails', '>= 2.7.6'
 # AuthNZ
-gem 'devise', '~> 4.7.3'
-gem 'omniauth-saml', '1.10.3'
+gem 'devise', '~> 4.8.0'
+gem 'omniauth-saml', '2.1.0'
+
+# Specifying the ruby saml due to this CVE: https://github.com/advisories/GHSA-jw9c-mfg7-9rx2
+gem 'ruby-saml', '~> 1.12.3'
 gem 'jwt', '~> 2.2.2'
 
 gem 'csv'
@@ -64,9 +67,10 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
+  # Updating selenimum webdriver which also requires rexml >= 3.2.5
+  gem 'selenium-webdriver', '~> 4.0'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers', '~> 4.0'
+  gem 'webdrivers'
   gem 'minitest-reporters', '1.4.3', require: false
   gem 'simplecov', '= 0.21.2', require: false
   gem 'simplecov-rcov', '= 0.2.3', require: false
