@@ -1,5 +1,18 @@
 # umd-handle
 
+---
+
+## ARCHIVED REPOSITORY
+
+This repository has been archived, and is no longer being developed or
+maintained.
+
+A Django-based version of the application is at:
+
+<https://github.com/umd-lib/umd-handle-django/>
+
+---
+
 REST-based Handle back-end service with administrative user interface.
 
 ## Introduction
